@@ -6,7 +6,8 @@ $accueilActive = null;
 
 $chapitresActive = 'active';
 
-//Gestion Navigation Chapitres
+
+
 ob_start();
 while ($chapterNav = $chapterNavList->fetch())
 {
@@ -19,17 +20,32 @@ while ($chapterNav = $chapterNavList->fetch())
 <?php $chapterNav = ob_get_clean();
 
 
-//Contenu du chapitre
+
 ob_start();
 ?>
 <section>
-    <h2><?= htmlspecialchars($post['post_title']) ?><h2>
-    <h3>Publié le <?= $post['date_creation_fr'] ?></h3>
+    <h2><?= htmlspecialchars($post['post_title']) ?></h2>
+    <p><em>Publié le <?= $post['date_creation_fr'] ?></em></p>
 
     <p><?= nl2br(htmlspecialchars($post['post_content'])) ?></p>
 <section/>
 
-
+<section>
+    <h4>Rédiger un commentaire</h4>
+    <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+        <div>
+            <label for"author">Votre nom d'utilisateur</label><br/>
+            <input type="text" id="author" name="author"/>
+        </div>
+        <div>
+            <label for="comment">Commentaire</label><br/>
+            <textarea id="comment" name="comment"></textarea>
+        </div>
+        <div>
+            <input type="submit"/>
+        </div>
+    </form>
+</section>
 
 <section>
     <h4>Commentaires</h4>
@@ -38,8 +54,10 @@ ob_start();
     while ($comment = $comments->fetch())
     {
     ?>
-        <h5><?= htmlspecialchars($comment['comment_author']) ?></h5>
-        <h6><?= htmlspecialchars($comment['date_comment_fr']) ?></h6>
+        <p>
+            <strong><?= htmlspecialchars($comment['comment_author']) ?></strong><br/>
+            <em>Le <?= htmlspecialchars($comment['date_comment_fr']) ?></em>
+        </p>
         <p><?= nl2br(htmlspecialchars($comment['comment_content'])) ?></p>
     <?php
     }
