@@ -34,11 +34,11 @@ ob_start();
     <h4>Rédiger un commentaire</h4>
     <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
         <div>
-            <label for"author">Votre nom d'utilisateur</label><br/>
+            <label for"author">Votre nom :</label><br/>
             <input type="text" id="author" name="author"/>
         </div>
         <div>
-            <label for="comment">Commentaire</label><br/>
+            <label for="comment">Votre commentaire :</label><br/>
             <textarea id="comment" name="comment"></textarea>
         </div>
         <div>
@@ -67,7 +67,7 @@ ob_start();
 
 <?php $content= ob_get_clean();
 
-require ('template.php');
+require('templateFront.php');
 
 
 
