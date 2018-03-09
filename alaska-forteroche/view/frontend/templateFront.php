@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title><?= $title ?></title>
+    <title><?= $head_title ?></title>
 </head>
 <body>
 
@@ -38,7 +38,7 @@
 
 <footer class="container-fluid footer text-center">
     <p>Billet simple pour l'Alaska - Jean Forteroche - Copyright 2018</p>
-    <p><a href="index.php?action=login">Administration</a></p>
+    <p><a href="index.php?action=admin">Administration</a></p>
 </footer>
 
 <!-- Optional JavaScript -->

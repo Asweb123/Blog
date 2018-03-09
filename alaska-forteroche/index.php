@@ -26,15 +26,13 @@ try {
 
 
 
-        } else if ($_GET['action'] === 'login') {
-            require 'view/backend/loginView.php';
 
 
         } else if ($_GET['action'] === 'admin') {
             if (!empty($_POST['name']) AND !empty($_POST['password'])) {
                 loginRegister($_POST['name'], $_POST['password']);
             } else {
-                throw new Exception('Veuillez remplir tous les champs d\'identifiant');
+                require ('view/backend/loginView.php');
             }
         }
     }

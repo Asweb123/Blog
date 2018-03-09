@@ -1,6 +1,6 @@
 <?php
 
-$title = 'Billet simple pour l\'Alaska';
+$head_title = 'Billet simple pour l\'Alaska';
 
 $accueilActive = 'active';
 

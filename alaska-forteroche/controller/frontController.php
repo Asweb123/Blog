@@ -26,7 +26,7 @@ function post($para1)
 function addComment($postId, $author, $comment)
 {
     $commentManager = new CommentManager();
-    $affectedLines =$commentManager->postComment($postId, $author, $comment);
+    $affectedLines =$commentManager->addComment($postId, $author, $comment);
 
     if ($affectedLines === false) {
         throw new Exception ('Impossible d\'ahouter le commentaire.');

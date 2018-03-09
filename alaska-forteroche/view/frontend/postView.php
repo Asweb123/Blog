@@ -1,6 +1,6 @@
 <?php
 
-$title = htmlspecialchars($post['post_title']);
+$head_title = htmlspecialchars($post['post_title']);
 
 $accueilActive = null;
 

@@ -11,6 +11,14 @@ class PostManager extends Manager
         return $postsIdList;
     }
 
+    public function getPostList()
+    {
+        $dataLink = $this->dbConnect();
+        $postList= $dataLink->query('SELECT id, post_title FROM posts');
+
+        return $postList;
+    }
+
     public function getPost($postId)
     {
         $dataLink = $this->dbConnect();
