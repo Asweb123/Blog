@@ -34,6 +34,38 @@ try {
             } else {
                 require ('view/backend/loginView.php');
             }
+
+        } else if ($_GET['action'] === 'readPost') {
+            if (isset($_GET['id']) AND $_GET['id'] > 0) {
+                readPost($_GET['id']);
+            } else {
+                throw new Exception('id de post non valide');
+            }
+
+        } else if ($_GET['action'] === 'modifyPost') {
+            if (isset($_GET['id']) AND $_GET['id'] > 0) {
+                modifyPost($_GET['id']);
+            } else {
+                throw new Exception('Y a un bug!');
+            }
+
+        } else if ($_GET['action'] === 'modifiedPost') {
+            if (isset($_GET['id']) AND $_GET['id'] > 0) {
+                if (!empty($_POST['title']) AND !empty($_POST['content'])) {
+                    modifiedPost($_GET['id'], $_POST['title'], $_POST['content']);
+                } else {
+                    throw new Exception('Il manque le titre ou le texte');
+                }
+            } else {
+                throw new Exception('Y a un bug d\'id!');
+            }
+
+        } else if ($_GET['action'] === 'deletePost') {
+            if (isset($_GET['id']) AND $_GET['id'] > 0) {
+                deletePost($_GET['id']);
+            } else {
+                throw new Exception('Encore un bug');
+            }
         }
     }
 

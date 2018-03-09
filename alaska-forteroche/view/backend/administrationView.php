@@ -7,7 +7,7 @@
 <table>
     <caption style="caption-side: top">Gestion des chapitres :
 
-    <form method="get" action="index.php?addPost" >
+    <form method="post" action="index.php?action=addPost" >
         <input type="submit" value="Ajouter">
     </form>
 
@@ -17,16 +17,16 @@
     <tr>
         <td><?= $post['post_title'] ?></td>
         <td>
-            <form method="get" action="index.php?readPost&id=<?= $post['id'] ?>" >
+            <form action="index.php?action=readPost&amp;id=<?= $post['id'] ?>" method="post">
                 <input type="submit" value="Voir">
             </form>
         </td>
         <td>
-            <form method="get" action="index.php?modifyPost&id=<?= $post['id'] ?>" >
+            <form action="index.php?action=modifyPost&amp;id=<?= $post['id'] ?>" method="post">
                 <input type="submit" value="Modifier">
             </form>
         <td>
-            <form method="get" action="index.php?deletePost&id=<?= $post['id'] ?>" >
+            <form action="index.php?action=deletePost&amp;id=<?= $post['id'] ?>" method="post">
                 <input type="submit" value="Supprimer">
             </form>
         </td>
@@ -56,7 +56,7 @@
         <td><?= $comment['comment_author'] ?></td>
         <td><?= $comment['date_comment_fr'] ?></td>
         <td>
-            <form method="get" action="index.php?Moderate&id=<?= $comment['id'] ?>" >
+            <form method="post" action="index.php?action=Moderate&id=<?= $comment['id'] ?>" >
                 <input type="submit" value="Modérer">
             </form>
         </td>
