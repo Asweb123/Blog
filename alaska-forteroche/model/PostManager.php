@@ -30,11 +30,19 @@ class PostManager extends Manager
         return $post;
     }
 
+    public function insertPost($post_title, $post_content)
+    {
+        $dataLink = $this->dbConnect();
+        $postRequest = $dataLink->prepare('INSERT INTO posts (post_title, post_content, post_date_init) VALUES (?, ?, NOW())');
+        $postRequest->execute(array($post_title, $post_content));
+
+    }
+
     public function updatePost($postId, $post_title, $post_content)
     {
         $dataLink =$this->dbConnect();
-        $postrequest = $dataLink->prepare('UPDATE posts SET post_title = ?, post_content = ? WHERE id = ?');
-        $postrequest->execute(array($post_title, $post_content, $postId));
+        $postRequest = $dataLink->prepare('UPDATE posts SET post_title = ?, post_content = ? WHERE id = ?');
+        $postRequest->execute(array($post_title, $post_content, $postId));
     }
 
     public function deletePost($postId)

@@ -27,10 +27,24 @@ function postList()
 
 function commentList()
 {
-        $commentManager =new CommentManager();
-        $commentList = $commentManager->getCommentList();
+    $commentManager =new CommentManager();
+    $commentList = $commentManager->getCommentList();
 
-        return $commentList;
+    return $commentList;
+}
+
+function addPost()
+{
+    require ('view/backend/addPostView.php');
+}
+
+function addedPost($post_title, $post_content)
+{
+    $postManager = New PostManager();
+    $postManager->insertPost($post_title, $post_content);
+
+
+
 }
 
 function readPost($postId)

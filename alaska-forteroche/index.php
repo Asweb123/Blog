@@ -35,6 +35,16 @@ try {
                 require ('view/backend/loginView.php');
             }
 
+        } else if ($_GET['action'] === 'addPost') {
+            addpost();
+
+        } else if ($_GET['action'] === 'addedPost') {
+            if (!empty($_POST['title']) AND !empty($_POST['content'])) {
+                addedPost($_POST['title'], $_POST['content']);
+            } else { echo 'Faire en sorte que JF soit redirigé vers la page d\'ajout avec le 
+            contenu encore présent';
+            }
+
         } else if ($_GET['action'] === 'readPost') {
             if (isset($_GET['id']) AND $_GET['id'] > 0) {
                 readPost($_GET['id']);

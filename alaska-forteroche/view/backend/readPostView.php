@@ -3,8 +3,8 @@
 <?php ob_start(); ?>
 
 <section>
-    <h2><?= htmlspecialchars($postSelected['post_title']) ?></h2>
-    <p><?= nl2br(htmlspecialchars($postSelected['post_content'])) ?></p>
+    <h2><?= $postSelected['post_title'] ?></h2>
+    <p><?= $postSelected['post_content'] ?></p>
 </section>
 
 <a href="#">Retour à l'espace d'administration</a>
