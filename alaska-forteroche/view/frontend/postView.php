@@ -59,6 +59,12 @@ ob_start();
             <em>Le <?= htmlspecialchars($comment['date_comment_fr']) ?></em>
         </p>
         <p><?= nl2br(htmlspecialchars($comment['comment_content'])) ?></p>
+
+        <form action="index.php?action=report" method="post">
+            <input type="hidden" name="id" id="id" value="<?= $comment['id'] ?>"/>
+            <input type="hidden" name="id_post" id="id_post" value="<?= $comment['id_post'] ?>"/>
+            <input type="submit" value="Signaler comme inapproprié"/>
+        </form>
     <?php
     }
     ?>

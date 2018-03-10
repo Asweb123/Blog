@@ -24,6 +24,12 @@ try {
                 throw new Exception('Aucun identifiant de billet envoyé.');
             }
 
+        } else if ($_GET['action'] === 'report') {
+            if (isset($_POST['id']) AND isset($_POST['id_post'])) {
+                report($_POST['id'], $_POST['id_post']);
+            } else {
+                throw new Exception('Y a un bug avec les POST');
+            }
 
 
 

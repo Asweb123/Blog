@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-<h1>Espace d'administration</h1>
+<h1>Console d'administration</h1>
 
 <table>
     <caption style="caption-side: top">Gestion des chapitres :
