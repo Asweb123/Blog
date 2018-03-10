@@ -7,7 +7,7 @@
     <p><?= $postSelected['post_content'] ?></p>
 </section>
 
-<a href="#">Retour à l'espace d'administration</a>
+<a href="index.php?action=admin">Retour à l'espace d'administration</a>
 
 <?php $content = ob_get_clean(); ?>
 

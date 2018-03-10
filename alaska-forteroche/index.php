@@ -82,6 +82,12 @@ try {
             } else {
                 throw new Exception('Encore un bug');
             }
+        } else if ($_GET['action'] === 'moderate') {
+            if (isset($_POST['comment_id']) AND $_POST['comment_id'] > 0) {
+                moderate($_POST['comment_id']);
+            } else {
+                throw new Exception('Pas d\'id passée en parametre');
+            }
         }
     }
 

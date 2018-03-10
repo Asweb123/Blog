@@ -43,8 +43,7 @@ function addedPost($post_title, $post_content)
     $postManager = New PostManager();
     $postManager->insertPost($post_title, $post_content);
 
-
-
+    header ('location: index.php?action=admin');
 }
 
 function readPost($postId)
@@ -68,7 +67,7 @@ function modifiedPost($postId, $post_title, $post_content)
     $postManager = new PostManager();
     $postModified =$postManager->updatePost($postId, $post_title, $post_content);
 
-    require ('view/backend/administrationView.php');
+    header ('location: index.php?action=admin');
 }
 
 function deletePost($postId)
@@ -76,5 +75,17 @@ function deletePost($postId)
     $postManager = new PostManager();
     $postManager->deletePost($postId);
 
-    require ('view/backend/administrationView.php');
+    header ('location: index.php?action=admin');
+}
+
+function moderate($commentId)
+{
+    $commentManager = new CommentManager();
+    $moderatedLine = $commentManager->moderate($commentId);
+
+    if ($moderatedLine === false) {
+        throw new Exception('Bug lors de l\'update de report à 3 de la table comments');
+    } else {
+        header ('location: index.php?action=admin');
+    }
 }

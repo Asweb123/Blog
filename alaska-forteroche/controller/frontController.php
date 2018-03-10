@@ -29,7 +29,7 @@ function addComment($postId, $author, $comment)
     $affectedLines = $commentManager->addComment($postId, $author, $comment);
 
     if ($affectedLines === false) {
-        throw new Exception ('Impossible d\'ahouter le commentaire.');
+        throw new Exception ('Impossible d\'ajouter le commentaire.');
     }
     else {
         header('location: index.php?action=post&id=' . $postId);

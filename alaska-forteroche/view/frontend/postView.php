@@ -62,7 +62,7 @@ ob_start();
 
         <form action="index.php?action=report" method="post">
             <input type="hidden" name="id" id="id" value="<?= $comment['id'] ?>"/>
-            <input type="hidden" name="id_post" id="id_post" value="<?= $comment['id_post'] ?>"/>
+            <input type="hidden" name="comment_id" id="comment_id" value="<?= $comment['id_post'] ?>"/>
             <input type="submit" value="Signaler comme inapproprié"/>
         </form>
     <?php

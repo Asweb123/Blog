@@ -41,4 +41,13 @@ VALUES(?, ?, ?, NOW())');
 
         return $reportedLine;
     }
+
+    public function moderate($commentId)
+    {
+        $dataLink = $this->dbConnect();
+        $commentReport = $dataLink->prepare('UPDATE comments SET report = ? WHERE id = ?');
+        $moderatedLine = $commentReport->execute(array(2, $commentId));
+
+        return  $moderatedLine;
+    }
 }

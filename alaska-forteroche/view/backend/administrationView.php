@@ -56,7 +56,8 @@
         <td><?= $comment['comment_author'] ?></td>
         <td><?= $comment['date_comment_fr'] ?></td>
         <td>
-            <form method="post" action="index.php?action=Moderate&id=<?= $comment['id'] ?>" >
+            <form action="index.php?action=moderate" method="post">
+                <input type="hidden" id="comment_id" name="comment_id" value="<?= $comment['id'] ?>"/>
                 <input type="submit" value="Modérer">
             </form>
         </td>
