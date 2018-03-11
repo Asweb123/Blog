@@ -39,6 +39,52 @@
 
 
 <table>
+    <caption style="caption-side: top">Commentaire(s) signalé(s) :</caption>
+
+    <?php
+    if (!$moderatedList == 1) {
+        echo '<p>Aucun commentaire signalé</p>';
+    } else { ?>
+        <td>Commentaire</td>
+        <td>Chapitre</td>
+        <td>Auteur</td>
+        <td>Date</td>
+        <td>Modérer</td>
+        <td>Ignorer</td>
+
+            <?php while ( $moderatedComment = $moderatedList->fetch() )
+            {
+            ?>
+            <tr>
+                <td><?= $moderatedComment['comment_content'] ?></td>
+                <td><?= $moderatedComment['id_post'] ?></td>
+                <td><?= $moderatedComment['comment_author'] ?></td>
+                <td><?= $moderatedComment['date_comment_fr'] ?></td>
+                <td>
+                    <form action="index.php?action=moderate" method="post">
+                        <input type="hidden" id="comment_id" name="comment_id" value="<?= $comment['id'] ?>"/>
+                        <input type="submit" value="Modérer"
+                    </form>
+                </td>
+                <td>
+                    <form action="index.php?action=cancelModerate" method="post">
+                        <input type="hidden" id="comment_id" name="comment_id" value="<?= $comment['id'] ?>"/>
+                        <input type="submit" value="Ignorer"
+                    </form>
+                </td>
+            </tr>
+            <?php
+            }
+            ?>
+    <?php
+    }
+    ?>
+
+</table>
+
+
+
+<table>
     <caption style="caption-side: top">Gestion des commentaires :
 
     <td>Commentaire</td>

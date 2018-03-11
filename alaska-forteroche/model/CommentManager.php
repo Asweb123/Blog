@@ -42,6 +42,15 @@ VALUES(?, ?, ?, NOW())');
         return $reportedLine;
     }
 
+    public function getModeratedList()
+    {
+        $dataLink = $this->dbConnect();
+        $moderatedList = $dataLink->query('SELECT id, id_post, comment_author, comment_content, DATE_FORMAT(comment_date, 
+\'%d/%m/%Y à %Hh%i\') AS date_comment_fr FROM comments WHERE report = 1 ORDER BY comment_date DESC');
+
+        return $moderatedList;
+    }
+
     public function moderate($commentId)
     {
         $dataLink = $this->dbConnect();

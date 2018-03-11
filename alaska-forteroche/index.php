@@ -25,8 +25,8 @@ try {
             }
 
         } else if ($_GET['action'] === 'report') {
-            if (isset($_POST['id']) AND isset($_POST['id_post'])) {
-                report($_POST['id'], $_POST['id_post']);
+            if (isset($_POST['comment_id']) AND isset($_POST['id_post'])) {
+                report($_POST['comment_id'], $_POST['id_post']);
             } else {
                 throw new Exception('Y a un bug avec les POST');
             }

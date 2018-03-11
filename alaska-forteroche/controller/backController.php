@@ -7,7 +7,9 @@ function loginRegister($name, $password)
 {
     if(($name === 'JF') AND ($password === 'XS')) {
         $postList = postList();
+        $moderatedList = moderatedList();
         $commentList = commentList();
+
         require ('view/backend/administrationView.php');
 
 
@@ -88,4 +90,12 @@ function moderate($commentId)
     } else {
         header ('location: index.php?action=admin');
     }
+}
+
+function moderatedList()
+{
+    $commentManager = new CommentManager;
+    $moderatedList = $commentManager->getModeratedList();
+
+    return $moderatedList;
 }
