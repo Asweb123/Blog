@@ -15,7 +15,7 @@ while ($chapterNav = $chapterNavList->fetch())
     <a class="dropdown-item" href="index.php?action=post&amp;id=<?= $chapterNav['id'] ?>">Chapitre <?= $chapterNav['chapter']?></a>
     <?php
 }
-$chapterNavList->closeCursor();
+
 ?>
 <?php $chapterNav = ob_get_clean();
 
@@ -48,9 +48,9 @@ ob_start();
     </form>
 </section>
 
-<section>
-    <h4>Commentaires</h4>
 
+
+<section>
     <?php
     while ($comment = $comments->fetch())
     {
@@ -59,20 +59,35 @@ ob_start();
         <strong><?= htmlspecialchars($comment['comment_author']) ?></strong><br/>
         <em>Le <?= htmlspecialchars($comment['date_comment_fr']) ?></em>
     </p>
-    <?php
-        if ($comment['report'] == 3) {
-            echo '<p>Ce message à été modéré</p>';
-        } else {
-        ?>
-        <p><?= nl2br(htmlspecialchars($comment['comment_content'])) ?></p>
-
-        <form action="index.php?action=report" method="post">
-            <input type="hidden" name="comment_id" id="comment_id" value="<?= $comment['id'] ?>"/>
-            <input type="hidden" name="id_post" id="id_post" value="<?= $comment['id_post'] ?>"/>
-            <input type="submit" value="Signaler comme inapproprié"/>
-        </form>
         <?php
+        switch ($comment['report']) {
+
+            case 1:
+                ?>
+                <p><?= nl2br(htmlspecialchars($comment['comment_content'])) ?></p>
+
+            <form action="index.php?action=report" method="post">
+                <input type="hidden" name="comment_id" id="comment_id" value="<?= $comment['id'] ?>"/>
+                <input type="hidden" name="id_post" id="id_post" value="<?= $comment['id_post'] ?>"/>
+                <input type="submit" value="Signaler comme inapproprié"/>
+            </form>
+                <?php
+                break;
+
+            case 2:
+                ?>
+                <p><?= nl2br(htmlspecialchars($comment['comment_content'])) ?></p>
+                <p>Ce commentaire à été signalé</p>
+                <?php
+                break;
+
+            case 3:
+                ?>
+                <p>Ce message à été modéré</p>
+                <?php
+                break;
         }
+
     }
     ?>
 </section>
