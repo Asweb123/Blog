@@ -1,8 +1,9 @@
-<?php $head_title = 'Chapitre ' . $postSelected['id']  ?>
+<?php $head_title = 'Chapitre ' . $postSelected['chapter']  ?>
 
 <?php ob_start(); ?>
 
 <section>
+    <h1>Chapitre <?= $postSelected['chapter'] ?></h1>
     <h2><?= $postSelected['post_title'] ?></h2>
     <p><?= $postSelected['post_content'] ?></p>
 </section>

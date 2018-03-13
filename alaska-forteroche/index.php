@@ -9,8 +9,7 @@ try {
 
         if ($_GET['action'] === 'post') {
             if (isset($_GET['id']) AND ($_GET['id'] > 0)) {
-                $chapterNavList = chapterNavList();
-                post($chapterNavList);
+                post($_GET['id']);
             }
 
         } else if ($_GET['action'] === 'addComment') {
@@ -45,8 +44,8 @@ try {
             addpost();
 
         } else if ($_GET['action'] === 'addedPost') {
-            if (!empty($_POST['title']) AND !empty($_POST['content'])) {
-                addedPost($_POST['title'], $_POST['content']);
+            if (!empty($_POST['chapter']) AND !empty($_POST['title']) AND !empty($_POST['content'])) {
+                addedPost($_POST['chapter'], $_POST['title'], $_POST['content']);
             } else { echo 'Faire en sorte que JF soit redirigé vers la page d\'ajout avec le 
             contenu encore présent';
             }
@@ -67,8 +66,8 @@ try {
 
         } else if ($_GET['action'] === 'modifiedPost') {
             if (isset($_GET['id']) AND $_GET['id'] > 0) {
-                if (!empty($_POST['title']) AND !empty($_POST['content'])) {
-                    modifiedPost($_GET['id'], $_POST['title'], $_POST['content']);
+                if (!empty($_POST['chapter']) AND !empty($_POST['title']) AND !empty($_POST['content'])) {
+                    modifiedPost($_GET['id'], $_POST['chapter'], $_POST['title'], $_POST['content']);
                 } else {
                     throw new Exception('Il manque le titre ou le texte');
                 }

@@ -15,6 +15,7 @@
     {
     ?>
     <tr>
+        <td>Chapitre <?= $post['chapter'] ?></td>
         <td><?= $post['post_title'] ?></td>
         <td>
             <form action="index.php?action=readPost&amp;id=<?= $post['id'] ?>" method="post">
@@ -41,44 +42,35 @@
 <table>
     <caption style="caption-side: top">Commentaire(s) signalé(s) :</caption>
 
-    <?php
-    if (empty($moderatedList) == false) {
-        echo '<td>Aucun commentaire signalé</td>';
-    } else { ?>
-        <th>Commentaire</th>
-        <th>Chapitre</th>
-        <th>Auteur</th>
-        <th>Date</th>
-        <th>Modérer</th>
-        <th>Ignorer</th>
+    <th>Commentaire</th>
+    <th>Auteur</th>
+    <th>Date</th>
+    <th>Modérer</th>
+    <th>Ignorer</th>
 
-            <?php while ( $moderatedComment = $moderatedList->fetch() )
-            {
-            ?>
-            <tr>
-                <td><?= $moderatedComment['comment_content'] ?></td>
-                <td><?= $moderatedComment['id_post'] ?></td>
-                <td><?= $moderatedComment['comment_author'] ?></td>
-                <td><?= $moderatedComment['date_comment_fr'] ?></td>
-                <td>
-                    <form action="index.php?action=moderate" method="post">
-                        <input type="hidden" id="comment_id" name="comment_id" value="<?= $moderatedComment['id'] ?>"/>
-                        <input type="submit" value="Modérer"/>
-                    </form>
-                </td>
-                <td>
-                    <form action="index.php?action=cancelModerate" method="post">
-                        <input type="hidden" id="comment_id" name="comment_id" value="<?= $moderatedComment['id'] ?>"/>
-                        <input type="submit" value="Ignorer"/>
-                    </form>
-                </td>
-            </tr>
-            <?php
-            }
-            ?>
-    <?php
-    }
-    ?>
+        <?php while ( $moderatedComment = $moderatedList->fetch() )
+        {
+        ?>
+        <tr>
+            <td><?= $moderatedComment['comment_content'] ?></td>
+            <td><?= $moderatedComment['comment_author'] ?></td>
+            <td><?= $moderatedComment['date_comment_fr'] ?></td>
+            <td>
+                <form action="index.php?action=moderate" method="post">
+                    <input type="hidden" id="comment_id" name="comment_id" value="<?= $moderatedComment['id'] ?>"/>
+                    <input type="submit" value="Modérer"/>
+                </form>
+            </td>
+            <td>
+                <form action="index.php?action=cancelModerate" method="post">
+                    <input type="hidden" id="comment_id" name="comment_id" value="<?= $moderatedComment['id'] ?>"/>
+                    <input type="submit" value="Ignorer"/>
+                </form>
+            </td>
+        </tr>
+        <?php
+        }
+        ?>
 
 </table>
 
@@ -88,7 +80,6 @@
     <caption style="caption-side: top">Gestion des commentaires :
 
     <th>Commentaire</th>
-    <th>Chapitre</th>
     <th>Auteur</th>
     <th>Date</th>
     <th>Etat</th>
@@ -99,7 +90,6 @@
     ?>
     <tr>
         <td><?= $comment['comment_content'] ?></td>
-        <td><?= $comment['id_post'] ?></td>
         <td><?= $comment['comment_author'] ?></td>
         <td><?= $comment['date_comment_fr'] ?></td>
         <td><?php

@@ -40,10 +40,10 @@ function addPost()
     require ('view/backend/addPostView.php');
 }
 
-function addedPost($post_title, $post_content)
+function addedPost($post_chapter, $post_title, $post_content)
 {
     $postManager = New PostManager();
-    $postManager->insertPost($post_title, $post_content);
+    $postManager->insertPost($post_chapter, $post_title, $post_content);
 
     header ('location: index.php?action=admin');
 }
@@ -64,10 +64,10 @@ function modifyPost($postId)
     require ('view/backend/modifyPostView.php');
 }
 
-function modifiedPost($postId, $post_title, $post_content)
+function modifiedPost($postId, $chapter, $post_title, $post_content)
 {
     $postManager = new PostManager();
-    $postModified =$postManager->updatePost($postId, $post_title, $post_content);
+    $postModified =$postManager->updatePost($postId, $chapter, $post_title, $post_content);
 
     header ('location: index.php?action=admin');
 }

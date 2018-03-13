@@ -10,7 +10,7 @@ ob_start();
 while ($chapterNav = $chapterNavList->fetch())
 {
 ?>
-<a class="dropdown-item" href="index.php?action=post&amp;id=<?= $chapterNav['id'] ?>">Chapitre <?= $chapterNav['id']?></a>
+<a class="dropdown-item" href="index.php?action=post&amp;id=<?= $chapterNav['id'] ?>">Chapitre <?= $chapterNav['chapter']?></a>
 <?php
 }
 $chapterNavList->closeCursor();

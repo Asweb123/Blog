@@ -6,19 +6,19 @@ require_once('model/CommentManager.php');
 function chapterNavList()
 {
     $postManager = new PostManager();
-    $chapterNavList = $postManager->getPostsId();
+    $chapterNavList = $postManager->getPostsChapter();
 
     return $chapterNavList;
 }
 
-function post($para1)
+function post($id)
 {
-    $chapterNavList = $para1;
+    $chapterNavList = chapterNavList();
     $postManager = new PostManager();
     $commentManager = new CommentManager();
 
-    $post = $postManager->getPost($_GET['id']);
-    $comments = $commentManager->getComments($_GET['id']);
+    $post = $postManager->getPost($id);
+    $comments = $commentManager->getComments($id);
 
     require ('view/frontend/postView.php');
 }

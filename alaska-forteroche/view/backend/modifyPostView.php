@@ -1,9 +1,12 @@
-<?php $head_title = 'Chapitre ' . $postSelected['id']  ?>
+<?php $head_title = 'Chapitre ' . $postSelected['chapter']  ?>
 
 <?php ob_start(); ?>
 
 
 <form action="index.php?action=modifiedPost&amp;id=<?= $postSelected['id'] ?>" method="post">
+
+    <label for="chapter">Modifier le numéro du chapitre</label>
+    <input type="text" name="chapter" id="chapter" value="<?= $postSelected['chapter'] ?>"/><br/>
 
     <label for="title">Modifier le titre du chapitre</label>
     <input type="text" name="title" id="title" value="<?= $postSelected['post_title'] ?>"/><br/>
@@ -17,7 +20,7 @@
 
 
 
-    <a href="#">Retour à l'espace d'administration</a>
+    <a href="index.php?action=admin">Retour à l'espace d'administration</a>
 
 <?php $content = ob_get_clean(); ?>
 

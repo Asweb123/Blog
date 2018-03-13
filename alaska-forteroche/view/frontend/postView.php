@@ -1,6 +1,6 @@
 <?php
 
-$head_title = htmlspecialchars($post['post_title']);
+$head_title = 'Chapitre ' . ($post['chapter']);
 
 $accueilActive = null;
 
@@ -12,10 +12,10 @@ ob_start();
 while ($chapterNav = $chapterNavList->fetch())
 {
     ?>
-    <a class="dropdown-item" href="index.php?action=post&amp;id=<?= $chapterNav['id'] ?>">Chapitre <?= $chapterNav['id']?></a>
+    <a class="dropdown-item" href="index.php?action=post&amp;id=<?= $chapterNav['id'] ?>">Chapitre <?= $chapterNav['chapter']?></a>
     <?php
 }
-
+$chapterNavList->closeCursor();
 ?>
 <?php $chapterNav = ob_get_clean();
 
@@ -24,6 +24,7 @@ while ($chapterNav = $chapterNavList->fetch())
 ob_start();
 ?>
 <section>
+    <h1>Chapitre <?= $post['chapter'] ?></h1>
     <h2><?= $post['post_title'] ?></h2>
     <p><em>Publié le <?= $post['date_creation_fr'] ?></em></p>
 
