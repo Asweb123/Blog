@@ -48,6 +48,14 @@ function addedPost($post_chapter, $post_title, $post_content)
     header ('location: index.php?action=admin');
 }
 
+function publishPost($postId)
+{
+    $postManager = New PostManager();
+    $postManager->publishPost($postId);
+
+    header ('location: index.php?action=admin');
+}
+
 function readPost($postId)
 {
     $postManager= new PostManager();

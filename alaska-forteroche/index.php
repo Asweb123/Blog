@@ -9,7 +9,7 @@ try {
 
         if ($_GET['action'] === 'post') {
             if (isset($_GET['id']) AND ($_GET['id'] > 0)) {
-                post($_GET['id']);
+                postPublished($_GET['id']);
             }
 
         } else if ($_GET['action'] === 'addComment') {
@@ -48,6 +48,13 @@ try {
                 addedPost($_POST['chapter'], $_POST['title'], $_POST['content']);
             } else { echo 'Faire en sorte que JF soit redirigé vers la page d\'ajout avec le 
             contenu encore présent';
+            }
+
+        } else if ($_GET['action'] === 'publishPost') {
+            if (isset($_GET['id']) AND $_GET['id'] > 0) {
+                publishPost($_GET['id']);
+            } else {
+                throw new Exception('id de post non valide');
             }
 
         } else if ($_GET['action'] === 'readPost') {

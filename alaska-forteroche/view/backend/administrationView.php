@@ -31,6 +31,17 @@
                 <input type="submit" value="Supprimer">
             </form>
         </td>
+        <?php
+        if($post['publish'] == 1){
+        ?>
+            <td>
+                <form action="index.php?action=publishPost&amp;id=<?= $post['id'] ?>" method="post">
+                    <input type="submit" value="Publier">
+                </form>
+            </td>
+        <?php
+        }
+        ?>
     </tr>
     <?php
     }

@@ -13,7 +13,7 @@
     <label for "content">Contenu du chapitre :</label><br/>
     <textarea name="content" id="content"></textarea>
 
-    <input type="submit" value="Publier le chapitre">
+    <input type="submit" value="Enregistrer le chapitre">
 
 </form>
 

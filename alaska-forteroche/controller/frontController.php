@@ -11,13 +11,13 @@ function chapterNavList()
     return $chapterNavList;
 }
 
-function post($id)
+function postPublished($id)
 {
     $chapterNavList = chapterNavList();
     $postManager = new PostManager();
     $commentManager = new CommentManager();
 
-    $post = $postManager->getPost($id);
+    $post = $postManager->getPostPublished($id);
     $comments = $commentManager->getComments($id);
 
     require ('view/frontend/postView.php');
