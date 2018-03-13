@@ -92,6 +92,18 @@ function moderate($commentId)
     }
 }
 
+function cancelModerate($commentId)
+{
+    $commentManager = new CommentManager();
+    $cancelReportLine = $commentManager->cancelModerate($commentId);
+
+    if ($cancelReportLine === false) {
+        throw new Exception('Bug lors de l\'update de report à 1 de la table comments');
+    } else {
+        header ('location: index.php?action=admin');
+    }
+}
+
 function moderatedList()
 {
     $commentManager = new CommentManager;

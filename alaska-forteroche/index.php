@@ -88,6 +88,12 @@ try {
             } else {
                 throw new Exception('Pas d\'id passée en parametre');
             }
+        } else if ($_GET['action'] === 'cancelModerate') {
+            if (isset($_POST['comment_id']) AND $_POST['comment_id'] > 0) {
+                cancelModerate($_POST['comment_id']);
+            } else {
+                throw new Exception('Pas d\'id passée en parametre');
+            }
         }
     }
 

@@ -14,7 +14,7 @@ class PostManager extends Manager
     public function getPostList()
     {
         $dataLink = $this->dbConnect();
-        $postList= $dataLink->query('SELECT id, post_title FROM posts');
+        $postList= $dataLink->query('SELECT id, chapter, post_title FROM posts ORDER BY chapter ASC');
 
         return $postList;
     }

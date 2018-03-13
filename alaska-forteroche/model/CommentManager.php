@@ -7,7 +7,7 @@ class CommentManager extends Manager
     public function getComments($postId)
     {
         $dataLink = $this->dbConnect();
-        $comments = $dataLink->prepare('SELECT id, id_post, comment_author, comment_content, DATE_FORMAT(comment_date, 
+        $comments = $dataLink->prepare('SELECT id, id_post, comment_author, comment_content, report, DATE_FORMAT(comment_date, 
 \'%d/%m/%Y à %Hh%i\') AS date_comment_fr FROM comments Where id_post = ? ORDER BY comment_date DESC');
         $comments->execute(array($postId));
 
@@ -37,7 +37,7 @@ VALUES(?, ?, ?, NOW())');
     {
         $dataLink = $this->dbConnect();
         $commentReport = $dataLink->prepare( 'UPDATE comments SET report = ? WHERE id = ?');
-        $reportedLine = $commentReport->execute(array(1, $commentId));
+        $reportedLine = $commentReport->execute(array(2, $commentId));
 
         return $reportedLine;
     }
@@ -46,7 +46,7 @@ VALUES(?, ?, ?, NOW())');
     {
         $dataLink = $this->dbConnect();
         $moderatedList = $dataLink->query('SELECT id, id_post, comment_author, comment_content, DATE_FORMAT(comment_date, 
-\'%d/%m/%Y à %Hh%i\') AS date_comment_fr FROM comments WHERE report = 1 ORDER BY comment_date DESC');
+\'%d/%m/%Y à %Hh%i\') AS date_comment_fr FROM comments WHERE report = 2 ORDER BY comment_date DESC');
 
         return $moderatedList;
     }
@@ -55,8 +55,17 @@ VALUES(?, ?, ?, NOW())');
     {
         $dataLink = $this->dbConnect();
         $commentReport = $dataLink->prepare('UPDATE comments SET report = ? WHERE id = ?');
-        $moderatedLine = $commentReport->execute(array(2, $commentId));
+        $moderatedLine = $commentReport->execute(array(3, $commentId));
 
         return  $moderatedLine;
+    }
+
+    public function cancelModerate($commentId)
+    {
+        $dataLink = $this->dbConnect();
+        $cancelReport = $dataLink->prepare('UPDATE comments SET report = ? WHERE id = ?');
+        $cancelReportLine = $cancelReport->execute(array(1, $commentId));
+
+        return  $cancelReportLine;
     }
 }

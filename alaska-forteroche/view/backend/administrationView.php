@@ -42,15 +42,15 @@
     <caption style="caption-side: top">Commentaire(s) signalé(s) :</caption>
 
     <?php
-    if (!$moderatedList == 1) {
-        echo '<p>Aucun commentaire signalé</p>';
+    if (empty($moderatedList) == false) {
+        echo '<td>Aucun commentaire signalé</td>';
     } else { ?>
-        <td>Commentaire</td>
-        <td>Chapitre</td>
-        <td>Auteur</td>
-        <td>Date</td>
-        <td>Modérer</td>
-        <td>Ignorer</td>
+        <th>Commentaire</th>
+        <th>Chapitre</th>
+        <th>Auteur</th>
+        <th>Date</th>
+        <th>Modérer</th>
+        <th>Ignorer</th>
 
             <?php while ( $moderatedComment = $moderatedList->fetch() )
             {
@@ -62,14 +62,14 @@
                 <td><?= $moderatedComment['date_comment_fr'] ?></td>
                 <td>
                     <form action="index.php?action=moderate" method="post">
-                        <input type="hidden" id="comment_id" name="comment_id" value="<?= $comment['id'] ?>"/>
-                        <input type="submit" value="Modérer"
+                        <input type="hidden" id="comment_id" name="comment_id" value="<?= $moderatedComment['id'] ?>"/>
+                        <input type="submit" value="Modérer"/>
                     </form>
                 </td>
                 <td>
                     <form action="index.php?action=cancelModerate" method="post">
-                        <input type="hidden" id="comment_id" name="comment_id" value="<?= $comment['id'] ?>"/>
-                        <input type="submit" value="Ignorer"
+                        <input type="hidden" id="comment_id" name="comment_id" value="<?= $moderatedComment['id'] ?>"/>
+                        <input type="submit" value="Ignorer"/>
                     </form>
                 </td>
             </tr>
@@ -87,11 +87,12 @@
 <table>
     <caption style="caption-side: top">Gestion des commentaires :
 
-    <td>Commentaire</td>
-    <td>Chapitre</td>
-    <td>Auteur</td>
-    <td>Date</td>
-    <td>Modérer</td>
+    <th>Commentaire</th>
+    <th>Chapitre</th>
+    <th>Auteur</th>
+    <th>Date</th>
+    <th>Etat</th>
+    <th>Modérer</th>
 
     <?php while ( $comment = $commentList->fetch())
     {
@@ -101,11 +102,37 @@
         <td><?= $comment['id_post'] ?></td>
         <td><?= $comment['comment_author'] ?></td>
         <td><?= $comment['date_comment_fr'] ?></td>
-        <td>
-            <form action="index.php?action=moderate" method="post">
-                <input type="hidden" id="comment_id" name="comment_id" value="<?= $comment['id'] ?>"/>
-                <input type="submit" value="Modérer">
-            </form>
+        <td><?php
+            switch ($comment['report']) {
+                case 1:
+                    echo 'Publié';
+                break;
+
+                case 2:
+                    echo 'Signalé';
+                break;
+
+                case 3:
+                    echo 'Modéré';
+            }?>
+        </td>
+
+
+        <td><?php
+            if ($comment['report'] == 3) { ?>
+                <form action="index.php?action=cancelModerate" method="post">
+                    <input type="hidden" id="comment_id" name="comment_id" value="<?= $comment['id'] ?>"/>
+                    <input type="submit" value="Annuler la modération">
+                </form>
+            <?php
+            } else { ?>
+                <form action="index.php?action=moderate" method="post">
+                    <input type="hidden" id="comment_id" name="comment_id" value="<?= $comment['id'] ?>"/>
+                    <input type="submit" value="Modérer">
+                </form>
+            <?php
+            }
+            ?>
         </td>
     </tr>
     <?php

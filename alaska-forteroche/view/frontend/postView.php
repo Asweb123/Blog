@@ -24,10 +24,10 @@ while ($chapterNav = $chapterNavList->fetch())
 ob_start();
 ?>
 <section>
-    <h2><?= htmlspecialchars($post['post_title']) ?></h2>
+    <h2><?= $post['post_title'] ?></h2>
     <p><em>Publié le <?= $post['date_creation_fr'] ?></em></p>
 
-    <p><?= nl2br(htmlspecialchars($post['post_content'])) ?></p>
+    <p><?= $post['post_content'] ?></p>
 <section/>
 
 <section>
@@ -54,10 +54,15 @@ ob_start();
     while ($comment = $comments->fetch())
     {
     ?>
-        <p>
-            <strong><?= htmlspecialchars($comment['comment_author']) ?></strong><br/>
-            <em>Le <?= htmlspecialchars($comment['date_comment_fr']) ?></em>
-        </p>
+    <p>
+        <strong><?= htmlspecialchars($comment['comment_author']) ?></strong><br/>
+        <em>Le <?= htmlspecialchars($comment['date_comment_fr']) ?></em>
+    </p>
+    <?php
+        if ($comment['report'] == 3) {
+            echo '<p>Ce message à été modéré</p>';
+        } else {
+        ?>
         <p><?= nl2br(htmlspecialchars($comment['comment_content'])) ?></p>
 
         <form action="index.php?action=report" method="post">
@@ -65,7 +70,8 @@ ob_start();
             <input type="hidden" name="id_post" id="id_post" value="<?= $comment['id_post'] ?>"/>
             <input type="submit" value="Signaler comme inapproprié"/>
         </form>
-    <?php
+        <?php
+        }
     }
     ?>
 </section>
