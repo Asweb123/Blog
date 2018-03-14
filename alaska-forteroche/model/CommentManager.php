@@ -42,10 +42,18 @@ VALUES(?, ?, ?, NOW())');
         return $reportedLine;
     }
 
+    public function getCheckedModeratedList()
+    {
+        $dataLink = $this->dbConnect();
+        $checkedModeratedList = $dataLink->query('SELECT report FROM comments WHERE report = 2');
+
+        return $checkedModeratedList;
+    }
+
     public function getModeratedList()
     {
         $dataLink = $this->dbConnect();
-        $moderatedList = $dataLink->query('SELECT id, id_post, comment_author, comment_content, DATE_FORMAT(comment_date, 
+        $moderatedList = $dataLink->query('SELECT id, id_post, comment_author, comment_content, report, DATE_FORMAT(comment_date, 
 \'%d/%m/%Y à %Hh%i\') AS date_comment_fr FROM comments WHERE report = 2 ORDER BY comment_date DESC');
 
         return $moderatedList;

@@ -4,8 +4,9 @@
 
 <h1>Console d'administration</h1>
 
+<h2>Gestion des chapitres :</h2>
+
 <table>
-    <caption style="caption-side: top">Gestion des chapitres :
 
     <form method="post" action="index.php?action=addPost" >
         <input type="submit" value="Ajouter">
@@ -46,12 +47,20 @@
     <?php
     }
     ?>
-
 </table>
 
 
+<h2>Commentaire(s) signalé(s) :</h2>
+
+<?php
+$req = $checkedModeratedList->fetchall();
+$reportColumn = array_column($req, 'report');
+if (!in_array(2, $reportColumn)) {
+    echo'<p>Aucun commentaire signalé</p>';
+} else {
+?>
+
 <table>
-    <caption style="caption-side: top">Commentaire(s) signalé(s) :</caption>
 
     <th>Commentaire</th>
     <th>Auteur</th>
@@ -59,36 +68,39 @@
     <th>Modérer</th>
     <th>Ignorer</th>
 
-        <?php while ( $moderatedComment = $moderatedList->fetch() )
-        {
-        ?>
-        <tr>
-            <td><?= $moderatedComment['comment_content'] ?></td>
-            <td><?= $moderatedComment['comment_author'] ?></td>
-            <td><?= $moderatedComment['date_comment_fr'] ?></td>
-            <td>
-                <form action="index.php?action=moderate" method="post">
-                    <input type="hidden" id="comment_id" name="comment_id" value="<?= $moderatedComment['id'] ?>"/>
-                    <input type="submit" value="Modérer"/>
-                </form>
-            </td>
-            <td>
-                <form action="index.php?action=cancelModerate" method="post">
-                    <input type="hidden" id="comment_id" name="comment_id" value="<?= $moderatedComment['id'] ?>"/>
-                    <input type="submit" value="Ignorer"/>
-                </form>
-            </td>
-        </tr>
-        <?php
-        }
-        ?>
-
+    <?php
+    while ( $moderatedComment = $moderatedList->fetch() )
+    {
+    ?>
+    <tr>
+        <td><?= $moderatedComment['comment_content'] ?></td>
+        <td><?= $moderatedComment['comment_author'] ?></td>
+        <td><?= $moderatedComment['date_comment_fr'] ?></td>
+        <td>
+            <form action="index.php?action=moderate" method="post">
+                <input type="hidden" id="comment_id" name="comment_id" value="<?= $moderatedComment['id'] ?>"/>
+                <input type="submit" value="Modérer"/>
+            </form>
+        </td>
+        <td>
+            <form action="index.php?action=cancelModerate" method="post">
+                <input type="hidden" id="comment_id" name="comment_id" value="<?= $moderatedComment['id'] ?>"/>
+                <input type="submit" value="Ignorer"/>
+            </form>
+        </td>
+    </tr>
+    <?php
+    }
+    ?>
 </table>
+<?php
+}
+?>
 
 
+<h2>Gestion des commentaires :</h2>
 
 <table>
-    <caption style="caption-side: top">Gestion des commentaires :
 
     <th>Commentaire</th>
     <th>Auteur</th>
@@ -141,6 +153,7 @@
     ?>
 
 </table>
+
 
 <?php $content = ob_get_clean() ?>
 

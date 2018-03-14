@@ -59,6 +59,7 @@ ob_start();
         <strong><?= htmlspecialchars($comment['comment_author']) ?></strong><br/>
         <em>Le <?= htmlspecialchars($comment['date_comment_fr']) ?></em>
     </p>
+
         <?php
         switch ($comment['report']) {
 

@@ -7,6 +7,7 @@ function loginRegister($name, $password)
 {
     if(($name === 'JF') AND ($password === 'XS')) {
         $postList = postList();
+        $checkedModeratedList = checkedModeratedList();
         $moderatedList = moderatedList();
         $commentList = commentList();
 
@@ -110,6 +111,14 @@ function cancelModerate($commentId)
     } else {
         header ('location: index.php?action=admin');
     }
+}
+
+function checkedModeratedList()
+{
+    $commentManager = new CommentManager;
+    $checkedModeratedList = $commentManager->getCheckedModeratedList();
+
+    return $checkedModeratedList;
 }
 
 function moderatedList()
