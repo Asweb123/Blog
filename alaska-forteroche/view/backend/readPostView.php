@@ -1,4 +1,4 @@
-<?php $head_title = 'Chapitre ' . $postSelected['chapter']  ?>
+<?php $head_title = 'Chapitre ' . $postSelected['chapter'] ?>
 
 <?php ob_start(); ?>
 
