@@ -3,59 +3,43 @@
 require_once ('model/PostManager.php');
 require_once ('model/CommentManager.php');
 
-function loginRegister($name, $password)
+
+function admin()
 {
-    if(($name === 'JF') AND ($password === 'XS')) {
-        $postList = postList();
-        $checkedModeratedList = checkedModeratedList();
-        $moderatedList = moderatedList();
-        $commentList = commentList();
+    $postManager = new PostManager();
+    $postList = $postManager->getPostList();
 
-        require ('view/backend/administrationView.php');
-
-
-    } else {
-        require ('view/backend/loginView.php');
-    }
-}
-
-
-function postList()
-{
-     $postManager = new PostManager();
-     $postList = $postManager->getPostList();
-
-     return $postList;
-}
-
-function commentList()
-{
     $commentManager =new CommentManager();
-    $commentList = $commentManager->getCommentList();
+    $checkedModeratedList = $commentManager->getCheckedModeratedList();
+    $moderatedList = $commentManager->getModeratedList();
 
-    return $commentList;
+    require ('view/backend/administrationView.php');
 }
+
 
 function addPost()
 {
     require ('view/backend/addPostView.php');
 }
 
+
 function addedPost($post_chapter, $post_title, $post_content)
 {
     $postManager = New PostManager();
     $postManager->insertPost($post_chapter, $post_title, $post_content);
 
-    header ('location: index.php?action=admin');
+    header ('location: console.php');
 }
+
 
 function publishPost($postId)
 {
     $postManager = New PostManager();
     $postManager->publishPost($postId);
 
-    header ('location: index.php?action=admin');
+    header ('location: console.php');
 }
+
 
 function readPost($postId)
 {
@@ -65,6 +49,7 @@ function readPost($postId)
     require ('view/backend/readPostView.php');
 }
 
+
 function modifyPost($postId)
 {
     $postManager= new PostManager();
@@ -73,21 +58,24 @@ function modifyPost($postId)
     require ('view/backend/modifyPostView.php');
 }
 
+
 function modifiedPost($postId, $chapter, $post_title, $post_content)
 {
     $postManager = new PostManager();
     $postModified =$postManager->updatePost($postId, $chapter, $post_title, $post_content);
 
-    header ('location: index.php?action=admin');
+    header ('location: console.php');
 }
+
 
 function deletePost($postId)
 {
     $postManager = new PostManager();
     $postManager->deletePost($postId);
 
-    header ('location: index.php?action=admin');
+    header ('location: console.php');
 }
+
 
 function moderate($commentId)
 {
@@ -97,9 +85,10 @@ function moderate($commentId)
     if ($moderatedLine === false) {
         throw new Exception('Bug lors de l\'update de report à 3 de la table comments');
     } else {
-        header ('location: index.php?action=admin');
+        header ('location: console.php');
     }
 }
+
 
 function cancelModerate($commentId)
 {
@@ -109,22 +98,15 @@ function cancelModerate($commentId)
     if ($cancelReportLine === false) {
         throw new Exception('Bug lors de l\'update de report à 1 de la table comments');
     } else {
-        header ('location: index.php?action=admin');
+        header ('location: console.php');
     }
 }
 
-function checkedModeratedList()
+function commentAll()
 {
-    $commentManager = new CommentManager;
-    $checkedModeratedList = $commentManager->getCheckedModeratedList();
+    $commentManager = new CommentManager();
+    $commentList = $commentManager->getCommentList();
 
-    return $checkedModeratedList;
+    require ('view/backend/commentAllView.php');
 }
 
-function moderatedList()
-{
-    $commentManager = new CommentManager;
-    $moderatedList = $commentManager->getModeratedList();
-
-    return $moderatedList;
-}

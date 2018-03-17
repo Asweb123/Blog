@@ -8,7 +8,7 @@ foreach ($_REQUEST as $key => $val)
 }
 
 
-require('controller/controller.php');
+require('controller/frontController.php');
 
 
 try {
@@ -41,8 +41,7 @@ try {
         }
 
     } else {
-        $chapterNavList = chapterNavList();
-        require('view/homeView.php');
+        home();
     }
 }
 catch(Exception $e) {

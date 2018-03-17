@@ -6,13 +6,8 @@ try {
 
     if (isset($_GET['action'])) {
 
-
         if ($_GET['action'] === 'admin') {
-            if (!empty($_POST['name']) AND !empty($_POST['password'])) {
-                loginRegister($_POST['name'], $_POST['password']);
-            } else {
-                require ('view/backend/loginView.php');
-            }
+            admin();
 
         } else if ($_GET['action'] === 'addPost') {
             addpost();
@@ -56,6 +51,9 @@ try {
                 throw new Exception('Y a un bug d\'id!');
             }
 
+        } else if ($_GET['action'] === 'commentAll') {
+            commentAll();
+
         } else if ($_GET['action'] === 'deletePost') {
             if (isset($_GET['id']) AND $_GET['id'] > 0) {
                 deletePost($_GET['id']);
@@ -75,14 +73,10 @@ try {
                 throw new Exception('Pas d\'id passée en parametre');
             }
         }
-    }
 
 
 
-
-
-
-    else {
+    } else {
         admin();
     }
 }

@@ -1,0 +1,8 @@
+
+
+<Files console.php>
+AuthName "Pour accéder à la console d'administration, veuillez vous identifier : "
+AuthType Basic
+AuthUserFile "C:\wamp64\www\alaska-forteroche\.htpasswd"
+Require valid-user
+</Files>

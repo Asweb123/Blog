@@ -2,22 +2,31 @@
 
 <?php ob_start() ?>
 
-<form action="index.php?action=addedPost" method="post">
+<h1 class="text-center my-5">Ajouter un chapitre</h1>
 
-    <label for="chapter">Numéro du chapitre :</label>
-    <input type="text" name="chapter" id="chapter"/><br/>
-
-    <label for="title">Titre du chapitre :</label>
-    <input type="text" name="title" id="title"/><br/>
-
-    <label for "content">Contenu du chapitre :</label><br/>
-    <textarea name="content" id="content"></textarea>
-
-    <input type="submit" value="Enregistrer le chapitre">
-
+<form action="console.php?action=addedPost" method="post">
+    <div class="form-group font-weight-bold">
+        <label for="chapter">Numéro du chapitre :</label>
+        <input type="text" class="form-control" name="chapter" id="chapter" required/><br/>
+    </div>
+    <div class="form-group font-weight-bold">
+        <label for="title">Titre du chapitre :</label>
+        <input type="text" class="form-control" name="title" id="title" required/><br/>
+    </div>
+    <div class="form-group font-weight-bold">
+        <label for "content">Contenu du chapitre :</label><br/>
+        <textarea rows="25" name="content" class="form-control" id="content"></textarea>
+    </div>
+    <div class="form-group text-right">
+        <input type="submit" class="btn btn-primary mb-2" value="Enregistrer le chapitre">
+    </div>
 </form>
+
+<p class="text-center">
+    <a href="console.php?action=admin">Retour à l'espace d'administration</a>
+</p>
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require 'templateBack.php' ?>
+<?php require ('templateBack.php') ?>
 
