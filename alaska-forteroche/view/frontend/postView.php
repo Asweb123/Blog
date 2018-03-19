@@ -4,11 +4,6 @@ $head_title = 'Chapitre ' . ($post['chapter']);
 
 $chapitresActive = 'active';
 
-ob_start(); ?>
-
-<div class="backjpeg"></div>
-
-<?php $header= ob_get_clean();
 
 ob_start();
 while ($chapterNav = $chapterNavList->fetch())
@@ -22,15 +17,26 @@ while ($chapterNav = $chapterNavList->fetch())
 <?php $chapterNav = ob_get_clean();
 
 
+ob_start(); ?>
+
+<header class="headerPost">
+    <div class="row h-100">
+        <div class="titleBack mx-auto my-auto">
+            <h1 class="text-center display-3 mb-4">Chapitre <?= $post['chapter'] ?></h1>
+            <h2 class="text-center font-weight-light"><?= $post['post_title'] ?></h2>
+        </div>
+    </div>
+</header>
+
+<?php $header= ob_get_clean();
+
 
 ob_start();
 ?>
 <section>
-    <h1 class="text-center my-5">Chapitre <?= $post['chapter'] ?></h1>
-    <h2 class="text-center"><?= $post['post_title'] ?></h2>
-    <p class="text-center"><em>Publié le <?= $post['date_creation_fr'] ?></em></p>
+    <p class="text-center lead my-5"><em>Publié le <?= $post['date_creation_fr'] ?></em></p>
 
-    <p class="text-justify"><?= $post['post_content'] ?></p>
+    <div class="text-justify lead"><?= $post['post_content'] ?></div>
 <section/>
 
 <section class="my-5">
@@ -60,8 +66,8 @@ ob_start();
     ?>
     <div class="border my-3 p-2 rounded">
         <p class="mb-1">
-            <strong><?= htmlspecialchars($comment['comment_author']) ?></strong>
-            <em>Le <?= htmlspecialchars($comment['date_comment_fr']) ?></em>
+            <strong class="h5"><?= htmlspecialchars($comment['comment_author']) ?></strong>
+            <em class="font-italic">Le <?= htmlspecialchars($comment['date_comment_fr']) ?></em>
         </p>
 
         <?php

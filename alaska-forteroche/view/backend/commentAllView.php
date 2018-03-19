@@ -5,7 +5,7 @@
 
 <h1 class="my-5 text-center">Commentaires</h1>
 
-<table class="table mt-4 table-hover">
+<table class="table mt-4 mb-5 table-hover">
 
     <thead>
     <tr>
@@ -64,7 +64,7 @@
     </tbody>
 </table>
 
-<p class="text-center">
+<p class="text-center mb-5">
     <a href="console.php?action=admin">Retour à l'espace d'administration</a>
 </p>
 

@@ -82,7 +82,7 @@ if (!in_array(2, $reportColumn)) {
 } else {
 ?>
 
-<table class="table mt-4 table-hover">
+<table class="table mt-4 mb-5 table-hover">
     <thead>
         <tr>
             <th class="border-top-0">Commentaire</th>

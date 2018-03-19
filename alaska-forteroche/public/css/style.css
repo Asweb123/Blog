@@ -1,11 +1,7 @@
- {
-    height: 100vh;
-    background: url("../imgs/mount-mckinley-903508.jpg") no-repeat fixed center;
-    background-size: cover;
-}
 
 
-.header {
+
+.headerHome {
     height: 95vh;
     background: url("../imgs/mount-mckinley-903508.jpg") no-repeat fixed center;
     background-size: cover;
@@ -31,7 +27,7 @@
     color: blue;
 }
 
-.backjpeg {
+.headerPost {
     height: 50vh;
     background: url("../imgs/mount-mckinley-903508.jpg") no-repeat fixed center;
     background-size: cover;

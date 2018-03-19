@@ -22,7 +22,7 @@
     </div>
 </form>
 
-<p class="text-center">
+<p class="text-center my-5">
     <a href="console.php?action=admin">Retour à l'espace d'administration</a>
 </p>
 

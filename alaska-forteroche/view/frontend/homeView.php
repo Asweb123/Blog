@@ -8,13 +8,11 @@ $chapitresActive = null;
 
 ob_start();
 ?>
-<header class="header">
+<header class="container-fluid headerHome">
     <div class="row h-100">
         <div class="titleBack mx-auto my-auto">
-            <div>
             <h1 class="text-center display-3 mb-4">Billet simple pour l'Alaska</h1>
             <h3 class="text-center font-weight-light">par<br/>Jean Forteroche</h3>
-            <div>
         </div>
     </div>
 </header>
