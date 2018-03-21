@@ -6,10 +6,7 @@ try {
 
     if (isset($_GET['action'])) {
 
-        if ($_GET['action'] === 'admin') {
-            admin();
-
-        } else if ($_GET['action'] === 'addPost') {
+        if ($_GET['action'] === 'addPost') {
             addpost();
 
         } else if ($_GET['action'] === 'addedPost') {
@@ -51,9 +48,6 @@ try {
                 throw new Exception('Y a un bug d\'id!');
             }
 
-        } else if ($_GET['action'] === 'commentAll') {
-            commentAll();
-
         } else if ($_GET['action'] === 'deletePost') {
             if (isset($_GET['id']) AND $_GET['id'] > 0) {
                 deletePost($_GET['id']);
@@ -72,8 +66,13 @@ try {
             } else {
                 throw new Exception('Pas d\'id passée en parametre');
             }
+        } else if ($_GET['action'] === 'pagination') {
+            if (isset($_GET['p']) AND $_GET['p'] > 0 AND ctype_digit($_GET['p']) == 1) {
+                commentList($_GET['p']);
+            } else {
+                throw new Exception('Pas de page passé en parametre');
+            }
         }
-
 
 
     } else {

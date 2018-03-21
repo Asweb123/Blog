@@ -2,6 +2,7 @@
 
 require_once ('model/PostManager.php');
 require_once ('model/CommentManager.php');
+require_once ('model/Pagination.php');
 
 
 function admin()
@@ -106,6 +107,27 @@ function commentAll()
 {
     $commentManager = new CommentManager();
     $commentList = $commentManager->getCommentList();
+
+    require ('view/backend/commentAllView.php');
+}
+
+function commentList($p)
+{
+    $perPage = 10;
+
+    $pagination = new Pagination();
+    $totalElement = $pagination->count();
+
+    $nbPage = ceil($totalElement/$perPage);
+
+    if($p > $nbPage){
+        $current = $nbPage;
+    } else {
+        $current = $p;
+    }
+
+    $firstOfPage = ($current - 1) * $perPage;
+    $commentPerPage = $pagination->elementPerPage($firstOfPage, $perPage);
 
     require ('view/backend/commentAllView.php');
 }

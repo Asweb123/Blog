@@ -4,7 +4,7 @@ $head_title = 'Billet simple pour l\'Alaska';
 
 $accueilActive = 'active';
 
-$chapitresActive = null;
+
 
 ob_start();
 ?>
@@ -42,7 +42,7 @@ ob_start();
         integer aenean metus egestas. Potenti nec adipiscing. Augue amet a neque proin vitae cursus risus dictum primis
         lobortis id nullam facilisi sit. Euismod potenti sed sagittis adipiscing.</p>
 
-    <form class="form text-center mt-5" action="index.php?action=post&id=1" method="post">
+    <form class="form text-center mt-5" action="index.php?action=post&id=22" method="post">
         <input type="submit" class="btn btn-primary" value="Commencer la lecture"/>
     </form>
 </section>

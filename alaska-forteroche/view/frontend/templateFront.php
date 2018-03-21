@@ -43,7 +43,7 @@
     <?= $content ?>
 </div>
 
-<footer class="container-fluid footer text-center border-top pt-4 pb-3">
+<footer class="container-fluid footer text-center border-top pt-3 pb-2">
     <h1 class="h6">Billet simple pour l'Alaska - Jean Forteroche - Copyright 2018</h1>
 </footer>
 

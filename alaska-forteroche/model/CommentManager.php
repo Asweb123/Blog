@@ -1,79 +1,73 @@
 <?php
-require_once ('model/Manager.php');
+require_once('model/DbManager.php');
 
-class CommentManager extends Manager
+class CommentManager extends DbManager
 {
 
     public function getComments($postId)
     {
-        $dataLink = $this->dbConnect();
-        $comments = $dataLink->prepare('SELECT id, id_post, comment_author, comment_content, report, DATE_FORMAT(comment_date, 
-\'%d/%m/%Y à %Hh%i\') AS date_comment_fr FROM comments Where id_post = ? ORDER BY comment_date DESC');
-        $comments->execute(array($postId));
+        $statement = 'SELECT id, id_post, comment_author, comment_content, report, DATE_FORMAT(comment_date, 
+\'%d/%m/%Y à %Hh%i\') AS date_comment_fr FROM comments Where id_post = ? ORDER BY comment_date DESC';
+        $comments = $this->executeRequest($statement, array($postId));
 
         return $comments;
     }
 
+
     public function addComment($postId, $author, $comment)
     {
-        $dataLink = $this->dbConnect();
-        $comments = $dataLink->prepare('INSERT INTO comments(id_post, comment_author, comment_content, comment_date)
-VALUES(?, ?, ?, NOW())');
-        $affectedLines = $comments->execute(array($postId, $author, $comment));
+        $statement = 'INSERT INTO comments(id_post, comment_author, comment_content, comment_date)
+VALUES(?, ?, ?, NOW())';
+        $affectedLines = $this->executeRequest($statement, array($postId, $author, $comment));
 
         return $affectedLines;
     }
 
-    public function getCommentList()
-    {
-        $dataLink = $this->dbConnect();
-        $commentList = $dataLink->query('SELECT id, id_post, comment_author, comment_content, report, DATE_FORMAT(comment_date, 
-\'%d/%m/%Y à %Hh%i\') AS date_comment_fr FROM comments ORDER BY comment_date DESC');
-
-        return $commentList;
-    }
 
     public function reportComment($commentId)
     {
-        $dataLink = $this->dbConnect();
-        $commentReport = $dataLink->prepare( 'UPDATE comments SET report = ? WHERE id = ?');
-        $reportedLine = $commentReport->execute(array(2, $commentId));
+        $statement = 'UPDATE comments SET report = ? WHERE id = ?';
+        $reportedLine = $this->executeRequest($statement, array(2, $commentId));
 
         return $reportedLine;
     }
 
+
     public function getCheckedModeratedList()
     {
-        $dataLink = $this->dbConnect();
-        $checkedModeratedList = $dataLink->query('SELECT report FROM comments WHERE report = 2');
+        $statement = 'SELECT report FROM comments WHERE report = 2';
+        $checkedModeratedList = $this->executeRequest($statement);
 
         return $checkedModeratedList;
     }
 
+
     public function getModeratedList()
     {
-        $dataLink = $this->dbConnect();
-        $moderatedList = $dataLink->query('SELECT id, id_post, comment_author, comment_content, report, DATE_FORMAT(comment_date, 
-\'%d/%m/%Y à %Hh%i\') AS date_comment_fr FROM comments WHERE report = 2 ORDER BY comment_date DESC');
+        $statement = 'SELECT id, id_post, comment_author, comment_content, report, DATE_FORMAT(comment_date, 
+\'%d/%m/%Y à %Hh%i\') AS date_comment_fr FROM comments WHERE report = 2 ORDER BY comment_date DESC';
+        $moderatedList = $this->executeRequest($statement);
 
         return $moderatedList;
     }
 
+
     public function moderate($commentId)
     {
-        $dataLink = $this->dbConnect();
-        $commentReport = $dataLink->prepare('UPDATE comments SET report = ? WHERE id = ?');
-        $moderatedLine = $commentReport->execute(array(3, $commentId));
+        $statement = 'UPDATE comments SET report = ? WHERE id = ?';
+        $moderatedLine = $this->executeRequest($statement, array(3, $commentId));
 
-        return  $moderatedLine;
+        return $moderatedLine;
     }
+
 
     public function cancelModerate($commentId)
     {
-        $dataLink = $this->dbConnect();
-        $cancelReport = $dataLink->prepare('UPDATE comments SET report = ? WHERE id = ?');
-        $cancelReportLine = $cancelReport->execute(array(1, $commentId));
+        $statement = 'UPDATE comments SET report = ? WHERE id = ?';
+        $cancelReportLine = $this->executeRequest($statement, array(1, $commentId));
 
-        return  $cancelReportLine;
+        return $cancelReportLine;
     }
+
+
 }

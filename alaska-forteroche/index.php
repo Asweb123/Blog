@@ -10,7 +10,6 @@ foreach ($_REQUEST as $key => $val)
 
 require('controller/frontController.php');
 
-
 try {
 
     if (isset($_GET['action'])) {
@@ -43,6 +42,14 @@ try {
     } else {
         home();
     }
+
+
+
+
+
+
+
+
 }
 catch(Exception $e) {
     echo 'Erreur : ' . $e->getMessage();

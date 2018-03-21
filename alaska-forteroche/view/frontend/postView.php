@@ -8,22 +8,26 @@ $chapitresActive = 'active';
 ob_start();
 while ($chapterNav = $chapterNavList->fetch())
 {
+    if ($chapterNav['chapter'] == $post['chapter']) {
+        $BoldDropClass = 'font-weight-bold';
+    } else {
+        $BoldDropClass = '';
+    }
     ?>
-    <a class="dropdown-item" href="index.php?action=post&amp;id=<?= $chapterNav['id'] ?>">Chapitre <?= $chapterNav['chapter']?></a>
-    <?php
+    <a class="dropdown-item <?=$BoldDropClass?> " href="index.php?action=post&amp;id=<?= $chapterNav['id'] ?>">Chapitre <?= $chapterNav['chapter']?></a>
+<?php
 }
-
 ?>
 <?php $chapterNav = ob_get_clean();
 
 
 ob_start(); ?>
 
-<header class="headerPost">
+<header class="headerPost container-fluid">
     <div class="row h-100">
         <div class="titleBack mx-auto my-auto">
             <h1 class="text-center display-3 mb-4">Chapitre <?= $post['chapter'] ?></h1>
-            <h2 class="text-center font-weight-light"><?= $post['post_title'] ?></h2>
+
         </div>
     </div>
 </header>
@@ -34,7 +38,8 @@ ob_start(); ?>
 ob_start();
 ?>
 <section>
-    <p class="text-center lead my-5"><em>Publié le <?= $post['date_creation_fr'] ?></em></p>
+    <h1 class="text-center mt-5"><?= $post['post_title'] ?></h1>
+    <p class="text-center mb-5">Publié le <?= $post['date_creation_fr'] ?></p>
 
     <div class="text-justify lead"><?= $post['post_content'] ?></div>
 <section/>
