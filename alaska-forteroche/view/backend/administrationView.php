@@ -46,7 +46,8 @@
                 ?>
                 <td class="col-2 text-center">
                     <form action="console.php?action=publishPost&amp;id=<?= $post['id'] ?>" method="post">
-                        <input type="submit" class="btn btn-info" style="width: 100px" value="Publier">
+                        <input type="submit" class="btn btn-info" style="width: 100px" value="Publier"
+                               onclick="return(confirm('Etes-vous sûr de vouloir publier maintenant ce chapitre?'))">
                     </form>
                 </td>
                 <?php
@@ -54,7 +55,8 @@
                 ?>
                 <td class="col-2">
                     <form action="console.php?action=deletePost&amp;id=<?= $post['id'] ?>" method="post">
-                        <input type="submit" class="btn btn-danger" style="width: 100px" value="Supprimer">
+                        <input type="submit" class="btn btn-danger" style="width: 100px" value="Supprimer"
+                               onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce chapitre?'))">
                     </form>
                 </td>
                 <?php
@@ -73,7 +75,7 @@
 
 <section>
 
-    <h2 class="d-inline align-middle mt-5">Gestion de commentaires :</h2>
+    <h2 class="d-inline align-middle mt-5">Gestion des commentaires :</h2>
 
     <form class="d-inline align-middle ml-3" method="post" action="console.php?action=pagination&p=1" >
         <input type="submit" class="btn btn-primary" value="Voir tous les commentaires">
@@ -130,6 +132,8 @@
     ?>
 
 </section>
+
+
 
 <?php $content = ob_get_clean() ?>
 

@@ -26,8 +26,7 @@ ob_start(); ?>
 <header class="headerPost container-fluid">
     <div class="row h-100">
         <div class="titleBack mx-auto my-auto">
-            <h1 class="text-center display-3 mb-4">Chapitre <?= $post['chapter'] ?></h1>
-
+            <h1 class="text-center display-3 big-title-post"><?= $post['post_title'] ?></h1>
         </div>
     </div>
 </header>
@@ -38,10 +37,10 @@ ob_start(); ?>
 ob_start();
 ?>
 <section>
-    <h1 class="text-center mt-5"><?= $post['post_title'] ?></h1>
+    <h1 class="text-center mt-5 ">Chapitre <?= $post['chapter'] ?></h1>
     <p class="text-center mb-5">Publié le <?= $post['date_creation_fr'] ?></p>
 
-    <div class="text-justify lead"><?= $post['post_content'] ?></div>
+    <div class="text-justify lead post-text"><?= $post['post_content'] ?></div>
 <section/>
 
 <section class="my-5">
@@ -49,14 +48,14 @@ ob_start();
     <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
         <div class="form-group font-weight-bold">
             <label for"author">Votre nom :</label><br/>
-            <input class="form-control" type="text" id="author" name="author"/>
+            <input class="form-control col-4 box-shadow" type="text" id="author" name="author"/>
         </div>
         <div class="form-group font-weight-bold">
             <label for="comment">Votre commentaire :</label><br/>
-            <textarea class="form-control" id="comment" name="comment"></textarea>
+            <textarea rows="6" class="form-control box-shadow" id="comment" name="comment"></textarea>
         </div>
         <div class="form-group font-weight-bold">
-            <input class="btn btn-primary" type="submit"/>
+            <input class="btn btn-primary" type="submit" value="Publier"/>
         </div>
     </form>
 </section>
@@ -69,7 +68,7 @@ ob_start();
     while ($comment = $comments->fetch())
     {
     ?>
-    <div class="border my-3 p-2 rounded">
+    <div class="border my-3 p-2 rounded box-shadow comment-color">
         <p class="mb-1">
             <strong class="h5"><?= htmlspecialchars($comment['comment_author']) ?></strong>
             <em class="font-italic">Le <?= htmlspecialchars($comment['date_comment_fr']) ?></em>
@@ -99,7 +98,7 @@ ob_start();
 
             case 3:
                 ?>
-                <p class="alert alert-danger mb-1">Ce commentaire à été modéré</p>
+                <p class="alert alert-danger mb-1">Ce commentaire a été modéré.</p>
                 <?php
                 break;
 

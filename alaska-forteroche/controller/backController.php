@@ -63,7 +63,7 @@ function modifyPost($postId)
 function modifiedPost($postId, $chapter, $post_title, $post_content)
 {
     $postManager = new PostManager();
-    $postModified =$postManager->updatePost($postId, $chapter, $post_title, $post_content);
+    $postManager->updatePost($postId, $chapter, $post_title, $post_content);
 
     header ('location: console.php');
 }
@@ -72,7 +72,17 @@ function modifiedPost($postId, $chapter, $post_title, $post_content)
 function deletePost($postId)
 {
     $postManager = new PostManager();
-    $postManager->deletePost($postId);
+    $commentManager = new CommentManager();
+
+    $comPostVerify = $commentManager->comPostVerify($postId);
+    $test = $comPostVerify->fetch();
+
+    if ($test != false) {
+        $comPostTest = true;
+    }
+        $postManager->deletePost($postId, $comPostTest);
+
+
 
     header ('location: console.php');
 }
@@ -86,7 +96,7 @@ function moderate($commentId)
     if ($moderatedLine === false) {
         throw new Exception('Bug lors de l\'update de report à 3 de la table comments');
     } else {
-        header ('location: console.php');
+        header("location:".  $_SERVER['HTTP_REFERER']);
     }
 }
 
@@ -99,7 +109,7 @@ function cancelModerate($commentId)
     if ($cancelReportLine === false) {
         throw new Exception('Bug lors de l\'update de report à 1 de la table comments');
     } else {
-        header ('location: console.php');
+        header("location:".  $_SERVER['HTTP_REFERER']);
     }
 }
 
@@ -108,7 +118,7 @@ function commentAll()
     $commentManager = new CommentManager();
     $commentList = $commentManager->getCommentList();
 
-    require ('view/backend/commentAllView.php');
+    require('view/backend/commentListView.php');
 }
 
 function commentList($p)
@@ -129,6 +139,6 @@ function commentList($p)
     $firstOfPage = ($current - 1) * $perPage;
     $commentPerPage = $pagination->elementPerPage($firstOfPage, $perPage);
 
-    require ('view/backend/commentAllView.php');
+    require('view/backend/commentListView.php');
 }
 

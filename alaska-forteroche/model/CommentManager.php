@@ -23,6 +23,14 @@ VALUES(?, ?, ?, NOW())';
         return $affectedLines;
     }
 
+    public function comPostVerify($postId)
+    {
+        $statement = 'SELECT id FROM comments WHERE id_post = ?';
+        $comPostVerify = $this->executeRequest($statement, array($postId));
+
+        return $comPostVerify;
+    }
+
 
     public function reportComment($commentId)
     {

@@ -13,7 +13,7 @@ class PostManager extends DbManager
 
     public function getPostList()
     {
-        $statement = 'SELECT id, chapter, post_title, publish FROM posts ORDER BY chapter ASC';
+        $statement = 'SELECT id, chapter, post_title, publish FROM posts ORDER BY chapter DESC';
         $postList = $this->executeRequest($statement);
 
         return $postList;
@@ -59,13 +59,18 @@ class PostManager extends DbManager
     public function updatePost($postId, $chapter, $post_title, $post_content)
     {
         $statement = 'UPDATE posts SET chapter = ?, post_title = ?, post_content = ? WHERE id = ?';
-        $this->executeRequest($statement, array($postId, $chapter, $post_title, $post_content));
+        $this->executeRequest($statement, array($chapter, $post_title, $post_content, $postId));
     }
 
 
-    public function deletePost($postId)
+    public function deletePost($postId, $comPostTest)
     {
-        $statement = 'DELETE posts, comments FROM posts INNER JOIN comments ON comments.id_post = posts.id WHERE posts.id = ?';
+        if ($comPostTest == true) {
+            $statement = 'DELETE posts, comments FROM posts INNER JOIN comments ON comments.id_post = posts.id WHERE posts.id = ?';
+        } else {
+            $statement = 'DELETE FROM posts WHERE id = ?';
+        }
+
         $this->executeRequest($statement, array($postId));
     }
 }
