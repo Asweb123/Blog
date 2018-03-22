@@ -4,6 +4,16 @@ require_once('model/DbManager.php');
 class CommentManager extends DbManager
 {
 
+    public function get5Comments($postId)
+    {
+        $statement = 'SELECT id, id_post, comment_author, comment_content, report, DATE_FORMAT(comment_date, 
+\'%d/%m/%Y à %Hh%i\') AS date_comment_fr FROM comments Where id_post = ? ORDER BY comment_date DESC LIMIT 5';
+        $comments = $this->executeRequest($statement, array($postId));
+
+        return $comments;
+    }
+
+
     public function getComments($postId)
     {
         $statement = 'SELECT id, id_post, comment_author, comment_content, report, DATE_FORMAT(comment_date, 

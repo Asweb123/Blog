@@ -20,6 +20,29 @@ function postPublished($id)
 
     $chapterNavList = $postManager->getPostsChapter();
     $post = $postManager->getPostPublished($id);
+
+    $comments = $commentManager->get5Comments($id);
+
+    $comPostVerify = $commentManager->comPostVerify($id);
+    $com5Test =$comPostVerify->fetchAll();
+    $nbCom= count($com5Test);
+
+    if ( ($nbCom <= 5)) {
+        $moreComLink = false;
+    } else {
+        $moreComLink = true;
+    }
+
+    require ('view/frontend/postView.php');
+}
+
+function postPublishedAll($id)
+{
+    $postManager = new PostManager();
+    $commentManager = new CommentManager();
+
+    $chapterNavList = $postManager->getPostsChapter();
+    $post = $postManager->getPostPublished($id);
     $comments = $commentManager->getComments($id);
 
     require ('view/frontend/postView.php');

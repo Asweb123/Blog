@@ -20,6 +20,11 @@ try {
                 postPublished($_GET['id']);
             }
 
+        } else if ($_GET['action'] === 'postAllCom') {
+            if (isset($_GET['id']) AND ($_GET['id'] > 0)) {
+                postPublishedAll($_GET['id']);
+            }
+
         } else if ($_GET['action'] === 'addComment') {
             if (isset($_GET['id']) AND $_GET['id'] > 0) {
                 if (!empty($_POST['author']) AND !empty($_POST['comment'])) {

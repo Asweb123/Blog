@@ -55,7 +55,7 @@ ob_start();
             <textarea rows="6" class="form-control box-shadow" id="comment" name="comment"></textarea>
         </div>
         <div class="form-group font-weight-bold">
-            <input class="btn btn-primary" type="submit" value="Publier"/>
+            <input class="btn btn-primary" type="submit" value="Envoyer"/>
         </div>
     </form>
 </section>
@@ -68,8 +68,8 @@ ob_start();
     while ($comment = $comments->fetch())
     {
     ?>
-    <div class="border my-3 p-2 rounded box-shadow comment-color">
-        <p class="mb-1">
+    <div class="border my-3 p-3 rounded box-shadow comment-color">
+        <p class="mb-2">
             <strong class="h5"><?= htmlspecialchars($comment['comment_author']) ?></strong>
             <em class="font-italic">Le <?= htmlspecialchars($comment['date_comment_fr']) ?></em>
         </p>
@@ -81,7 +81,7 @@ ob_start();
                 ?>
                 <p class="mb-1"><?= nl2br(htmlspecialchars($comment['comment_content'])) ?></p>
 
-            <form class="text-right mb-1" action="index.php?action=report" method="post">
+            <form class="text-right" action="index.php?action=report" method="post">
                 <input type="hidden" name="comment_id" id="comment_id" value="<?= $comment['id'] ?>"/>
                 <input type="hidden" name="id_post" id="id_post" value="<?= $comment['id_post'] ?>"/>
                 <input type="submit" class="mybtn" value="Signaler comme inapproprié"/>
@@ -92,13 +92,13 @@ ob_start();
             case 2:
                 ?>
                 <p class="mb-1"><?= nl2br(htmlspecialchars($comment['comment_content'])) ?></p>
-                <p class="alert alert-warning mb-1">Ce commentaire a été signalé.</p>
+                <p class="alert alert-warning mb-0">Ce commentaire a été signalé.</p>
                 <?php
                 break;
 
             case 3:
                 ?>
-                <p class="alert alert-danger mb-1">Ce commentaire a été modéré.</p>
+                <p class="alert alert-danger mb-0">Ce commentaire a été modéré.</p>
                 <?php
                 break;
 
@@ -106,6 +106,12 @@ ob_start();
     ?>
     </div>
     <?php
+    }
+
+    if (isset($moreComLink) AND ($moreComLink == true)) {
+        ?>
+        <p class="text-center my-5 font-weight-bold"><a href="index.php?action=postAllCom&amp;id=<?= $post['id'] ?>" >Voir tous les commentaires</a></p>
+        <?php
     }
     ?>
 
