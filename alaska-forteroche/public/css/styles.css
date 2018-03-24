@@ -1,6 +1,6 @@
-/*---------------TEMPLATE---------------*/
-body {
-    background-color: #FAFFFF ;
+/*---------------TEMPLATE FRONT---------------*/
+.body-front {
+    background-color: #FFFFFA ;
 }
 
 .navbar {
@@ -66,6 +66,8 @@ body {
     font-size: 1rem;
 }
 
+
+
 .comment-color {
     background-color: white;
 }
@@ -83,15 +85,24 @@ body {
     background-size: cover;
 }
 
+
 .box-shadow {
     -webkit-box-shadow: 2px 4px 20px -2px rgba(207,207,207,0.59);
     -moz-box-shadow: 2px 4px 20px -2px rgba(207,207,207,0.59);
     box-shadow: 2px 4px 20px -2px rgba(207,207,207,0.59);
 }
 
+/*---------------TEMPLATE BACK---------------*/
 
+.body-back {
+    background-color: #FAFAFA;
+}
 
+/*---------------------ADMIN-------------------*/
 
+.console-section {
+    background-color: white;
+}
 
 /**************************************************************/
 @media (min-width: 576px) {
@@ -121,7 +132,7 @@ body {
 
 
     .big-title-post {
-        font-size: 2.7rem;
+        font-size: 2.9rem;
     }
 
     .post-text {
@@ -231,56 +242,4 @@ body {
         font-size: 1.2rem;
     }
 
-
 }
-
-
-
-
-/*----------------------------------------------------------------*/
-/*                        VIDEO HEADER                            */
-/*----------------------------------------------------------------*/
-
-.homepage-hero-module {
-    border-right: none;
-    border-left: none;
-    position: relative;
-}
-.no-video .video-container video,
-.touch .video-container video {
-    display: none;
-}
-.no-video .video-container .poster,
-.touch .video-container .poster {
-    display: block !important;
-}
-.video-container {
-    position: relative;
-    bottom: 0%;
-    left: 0%;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    background: #000;
-}
-.video-container .poster img {
-    width: 100%;
-    bottom: 0;
-    position: absolute;
-}
-.video-container .filter {
-    z-index: 100;
-    position: absolute;
-    background: rgba(0, 0, 0, 0.4);
-    width: 100%;
-}
-.video-container video {
-    position: absolute;
-    z-index: 0;
-    bottom: 0;
-}
-.video-container video.fillWidth {
-    width: 100%;
-}
-
-

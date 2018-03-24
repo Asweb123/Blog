@@ -23,7 +23,7 @@
 </form>
 
 <p class="text-center my-5">
-    <a href="console.php">Retour à l'espace d'administration</a>
+    <a class="font-weight-bold" href="console.php">Retour à l'espace d'administration</a>
 </p>
 
 <?php $content = ob_get_clean(); ?>

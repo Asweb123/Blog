@@ -18,7 +18,7 @@ class PostManager extends DbManager
         return $postsChapterList;
     }
 
-
+/*
     public function getPostList()
     {
         $statement = 'SELECT id, chapter, post_title, publish FROM posts ORDER BY chapter DESC';
@@ -26,7 +26,7 @@ class PostManager extends DbManager
 
         return $postList;
     }
-
+*/
 
     public function getPostPublished($id)
     {

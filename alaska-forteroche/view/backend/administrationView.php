@@ -5,11 +5,11 @@
 <h1 class="text-center font-weight-bold my-5">Console d'administration</h1>
 
 
-<section>
+<section class="border p-4 rounded box-shadow console-section">
 
-    <h2 class="d-inline align-middle">Gestion des chapitres :</h2>
+    <h2 class=" align-middle text-center mb-4">Gestion des chapitres</h2>
 
-    <form class="d-inline align-middle ml-3" method="post" action="console.php?action=addPost" >
+    <form class=" align-middle ml-3 text-center" method="post" action="console.php?action=addPost" >
         <input type="submit" class="btn btn-primary" value="Ajouter un chapitre">
     </form>
 
@@ -19,26 +19,18 @@
             <tr>
                 <th class="border-top-0">Chapitre</th>
                 <th class="border-top-0 text-center">Titre</th>
-        <?php /*<th class="border-top-0"></th> */ ?>
                 <th class="border-top-0"></th>
                 <th class="border-top-0"></th>
             </tr>
         </thead>
 
         <tbody>
-            <?php while ( $post = $postList->fetch())
+            <?php while ( $post = $postPerPage->fetch())
             {
             ?>
             <tr>
                 <td class="align-middle text-center"><?= $post['chapter'] ?></td>
                 <td class="align-middle col-5 text-center"><?= $post['post_title'] ?></td>
-                <?php /*
-                <td class="col-2">
-                    <form action="console.php?action=readPost&amp;id=<?= $post['id'] ?>" method="post">
-                        <input type="submit" class="btn btn-success" value="Relire">
-                    </form>
-                </td>
-                */ ?>
                 <td class="">
                     <form action="console.php?action=modifyPost&amp;id=<?= $post['id'] ?>" method="post">
                         <input type="submit" class="btn btn-warning" style="width: 100px" value="Modifier">
@@ -72,14 +64,45 @@
 
     </table>
 
+
+    <nav class="mb-4" aria-label="navigation chapitres">
+        <ul class="pagination justify-content-center">
+            <li class="page-item <?php if ($current == 1){echo 'disabled';}  ?>">
+                <a class="page-link" href="console.php?p=<?php if ($current != 1){echo $current-1;}else{echo $current;} ?>">Précédent</a>
+            </li>
+
+            <?php
+            for($i=1; $i<=$nbPage; $i++){
+                if($i == $current){
+                    ?>
+                    <li class="page-item active">
+                        <a class="page-link" href="console.php?p=<?= $i ?>"><?= $i ?></a>
+                    </li>
+                    <?php
+                } else {
+                    ?>
+                    <li class="page-item">
+                        <a class="page-link" href="console.php?p=<?= $i ?>"><?= $i ?></a>
+                    </li>
+                    <?php
+                }
+            }
+            ?>
+            <li class="page-item <?php if ($current == $nbPage){echo 'disabled';} ?>">
+                <a class="page-link" href="console.php?p=<?php if ($current != $nbPage){echo $current+1;}else{echo $current;} ?>">Suivant</a>
+            </li>
+
+        </ul>
+    </nav>
+
 </section>
 
 
-<section>
+<section class="border my-5 p-4 rounded box-shadow console-section">
 
-    <h2 class="d-inline align-middle mt-5">Gestion des commentaires :</h2>
+    <h2 class="text-center align-middle  mb-4">Gestion des commentaires</h2>
 
-    <form class="d-inline align-middle ml-3" method="post" action="console.php?action=pagination&p=1" >
+    <form class="text-center align-middle ml-3" method="post" action="console.php?action=commentList&p=1" >
         <input type="submit" class="btn btn-primary" value="Voir tous les commentaires">
     </form>
 
@@ -91,7 +114,7 @@
     } else {
     ?>
 
-    <table class="table mt-4 mb-5 table-hover">
+    <table class="table mt-4 mb-3 table-hover">
         <thead>
             <tr>
                 <th class="border-top-0">Commentaire(s) signalé(s)</th>

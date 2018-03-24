@@ -5,10 +5,24 @@ require_once ('model/CommentManager.php');
 require_once ('model/Pagination.php');
 
 
-function admin()
+function admin($p)
 {
-    $postManager = new PostManager();
-    $postList = $postManager->getPostList();
+    $perPage = 5;
+    $table ='posts';
+
+    $pagination = new Pagination();
+    $totalElement = $pagination->count($table);
+
+    $nbPage = ceil($totalElement/$perPage);
+
+    if($p > $nbPage){
+        $current = $nbPage;
+    } else {
+        $current = $p;
+    }
+
+    $firstOfPage = ($current - 1) * $perPage;
+    $postPerPage = $pagination->elementPerPage($table, $firstOfPage, $perPage);
 
     $commentManager =new CommentManager();
     $checkedModeratedList = $commentManager->getCheckedModeratedList();
@@ -115,9 +129,10 @@ function commentAll()
 function commentList($p)
 {
     $perPage = 10;
+    $table = 'comments';
 
     $pagination = new Pagination();
-    $totalElement = $pagination->count();
+    $totalElement = $pagination->count($table);
 
     $nbPage = ceil($totalElement/$perPage);
 
@@ -128,7 +143,7 @@ function commentList($p)
     }
 
     $firstOfPage = ($current - 1) * $perPage;
-    $commentPerPage = $pagination->elementPerPage($firstOfPage, $perPage);
+    $commentPerPage = $pagination->elementPerPage($table,$firstOfPage, $perPage);
 
     require('view/backend/commentListView.php');
 }
