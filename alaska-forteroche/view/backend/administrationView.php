@@ -19,7 +19,7 @@
             <tr>
                 <th class="border-top-0">Chapitre</th>
                 <th class="border-top-0 text-center">Titre</th>
-                <th class="border-top-0"></th>
+        <?php /*<th class="border-top-0"></th> */ ?>
                 <th class="border-top-0"></th>
                 <th class="border-top-0"></th>
             </tr>
@@ -32,19 +32,21 @@
             <tr>
                 <td class="align-middle text-center"><?= $post['chapter'] ?></td>
                 <td class="align-middle col-5 text-center"><?= $post['post_title'] ?></td>
+                <?php /*
                 <td class="col-2">
                     <form action="console.php?action=readPost&amp;id=<?= $post['id'] ?>" method="post">
-                        <input type="submit" class="btn btn-success" value="Voir">
+                        <input type="submit" class="btn btn-success" value="Relire">
                     </form>
                 </td>
-                <td class="col-2">
+                */ ?>
+                <td class="">
                     <form action="console.php?action=modifyPost&amp;id=<?= $post['id'] ?>" method="post">
-                        <input type="submit" class="btn btn-warning" value="Modifier">
+                        <input type="submit" class="btn btn-warning" style="width: 100px" value="Modifier">
                     </form>
                 <?php
                 if($post['publish'] == 1){
                 ?>
-                <td class="col-2 text-center">
+                <td class=" text-center">
                     <form action="console.php?action=publishPost&amp;id=<?= $post['id'] ?>" method="post">
                         <input type="submit" class="btn btn-info" style="width: 100px" value="Publier"
                                onclick="return(confirm('Etes-vous sûr de vouloir publier maintenant ce chapitre?'))">
@@ -53,7 +55,7 @@
                 <?php
                 } else {
                 ?>
-                <td class="col-2">
+                <td class="">
                     <form action="console.php?action=deletePost&amp;id=<?= $post['id'] ?>" method="post">
                         <input type="submit" class="btn btn-danger" style="width: 100px" value="Supprimer"
                                onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce chapitre?'))">
@@ -112,13 +114,13 @@
                 <td>
                     <form action="console.php?action=moderate" method="post">
                         <input type="hidden" id="comment_id" name="comment_id" value="<?= $moderatedComment['id'] ?>"/>
-                        <input type="submit" class="btn btn-danger" value="Modérer"/>
+                        <input type="submit" class="btn btn-danger" style="width: 100px" value="Modérer"/>
                     </form>
                 </td>
                 <td>
                     <form action="console.php?action=cancelModerate" method="post">
                         <input type="hidden" id="comment_id" name="comment_id" value="<?= $moderatedComment['id'] ?>"/>
-                        <input type="submit" class="btn btn-success" value="Ignorer"/>
+                        <input type="submit" class="btn btn-success" style="width: 100px" value="Ignorer"/>
                     </form>
                 </td>
             </tr>

@@ -2,6 +2,14 @@
 require_once('model/DbManager.php');
 class PostManager extends DbManager
 {
+    public function getPostsIdPublished()
+    {
+        $statement = 'SELECT id FROM posts WHERE publish = 2';
+        $postsChapterList = $this->executeRequest($statement);
+
+        return $postsChapterList;
+    }
+
     public function getPostsChapter()
     {
         $statement = 'SELECT id, chapter FROM posts WHERE publish = 2 ORDER BY chapter ASC ';

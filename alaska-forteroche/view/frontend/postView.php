@@ -36,12 +36,18 @@ ob_start(); ?>
 
 ob_start();
 ?>
+
+
+
 <section>
     <h1 class="text-center mt-5 ">Chapitre <?= $post['chapter'] ?></h1>
     <p class="text-center mb-5">Publié le <?= $post['date_creation_fr'] ?></p>
 
     <div class="text-justify lead post-text"><?= $post['post_content'] ?></div>
-<section/>
+</section>
+
+
+
 
 <section class="my-5">
     <h4 class="mb-3">Rédiger un commentaire</h4>
@@ -116,6 +122,8 @@ ob_start();
     ?>
 
 </section>
+
+
 
 
 <?php $content= ob_get_clean();

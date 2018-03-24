@@ -9,20 +9,6 @@ $accueilActive = 'active';
 ob_start();
 ?>
 
-    <div class="homepage-hero-module">
-        <div class="video-container">
-            <div class="filter"></div>
-            <video autoplay loop class="fillWidth">
-                <source src="public/video/MP4/Mt_Baker.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
-                <source src="public/video/WEBEM/Mt_Baker.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
-            </video>
-            <div class="poster hidden">
-                <img src="public/video/Snapshots/Mt_Baker.jpg" alt="">
-            </div>
-        </div>
-    </div>
-
-
 <header class="container-fluid headerHome">
     <div class="row h-100">
         <div class="titleBack mx-auto my-auto">

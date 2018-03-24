@@ -1,5 +1,4 @@
 
-
 <Files console.php>
 AuthName "Pour accéder à la console d'administration, veuillez vous identifier : "
 AuthType Basic

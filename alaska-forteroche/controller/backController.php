@@ -42,15 +42,6 @@ function publishPost($postId)
 }
 
 
-function readPost($postId)
-{
-    $postManager= new PostManager();
-    $postSelected = $postManager->getPost($postId);
-
-    require ('view/backend/readPostView.php');
-}
-
-
 function modifyPost($postId)
 {
     $postManager= new PostManager();
