@@ -1,9 +1,9 @@
 <?php
 require_once('model/DbManager.php');
 
-class Pagination extends DbManager
+abstract class Pagination extends DbManager
 {
-    public function count($table)
+    protected function count($table)
     {
 
 
@@ -23,7 +23,7 @@ class Pagination extends DbManager
         return $totalElement;
     }
 
-    public function ElementPerPage($table, $firstOfPage, $perPage)
+    protected function ElementPerPage($table, $firstOfPage, $perPage)
     {
         if ($table == 'comments') {
             $statement = 'SELECT id, id_post, comment_author, comment_content, report, DATE_FORMAT(comment_date, 

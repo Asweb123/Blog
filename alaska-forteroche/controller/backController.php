@@ -3,26 +3,23 @@
 require_once ('model/PostManager.php');
 require_once ('model/CommentManager.php');
 require_once ('model/Pagination.php');
-
+require_once ('view/backend/NavPaginationView.php');
+require_once ('controller/PaginationController.php');
 
 function admin($p)
 {
     $perPage = 5;
     $table ='posts';
 
-    $pagination = new Pagination();
-    $totalElement = $pagination->count($table);
+    $paginationController = new PaginationController();
+    $nbPage = $paginationController->nbPage($perPage, $table);
+    $current = $paginationController->current($p, $nbPage);
+    $postPerPage = $paginationController->elementPerPage($current, $perPage, $table);
 
-    $nbPage = ceil($totalElement/$perPage);
 
-    if($p > $nbPage){
-        $current = $nbPage;
-    } else {
-        $current = $p;
-    }
-
-    $firstOfPage = ($current - 1) * $perPage;
-    $postPerPage = $pagination->elementPerPage($table, $firstOfPage, $perPage);
+    $navPaginationView = New NavPaginationView();
+    $href = 'console.php?p=';
+    $navLink = $navPaginationView->navLink($href, $current, $nbPage);
 
     $commentManager =new CommentManager();
     $checkedModeratedList = $commentManager->getCheckedModeratedList();
@@ -118,32 +115,20 @@ function cancelModerate($commentId)
     }
 }
 
-function commentAll()
-{
-    $commentManager = new CommentManager();
-    $commentList = $commentManager->getCommentList();
-
-    require('view/backend/commentListView.php');
-}
 
 function commentList($p)
 {
     $perPage = 10;
-    $table = 'comments';
+    $table ='comments';
 
-    $pagination = new Pagination();
-    $totalElement = $pagination->count($table);
+    $paginationController = new PaginationController();
+    $nbPage = $paginationController->nbPage($perPage, $table);
+    $current = $paginationController->current($p, $nbPage);
+    $commentPerPage = $paginationController->elementPerPage($current, $perPage, $table);
 
-    $nbPage = ceil($totalElement/$perPage);
-
-    if($p > $nbPage){
-        $current = $nbPage;
-    } else {
-        $current = $p;
-    }
-
-    $firstOfPage = ($current - 1) * $perPage;
-    $commentPerPage = $pagination->elementPerPage($table,$firstOfPage, $perPage);
+    $navPaginationView = New NavPaginationView();
+    $href = 'console.php?action=commentList&amp;p=';
+    $navLink = $navPaginationView->navLink($href, $current, $nbPage);
 
     require('view/backend/commentListView.php');
 }
