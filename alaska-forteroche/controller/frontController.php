@@ -1,18 +1,30 @@
 <?php
-
 require_once('model/PostManager.php');
-require_once('model/CommentManager.php');
+require_once('model/Post.php');
 
 
 function home()
 {
-    $postManager = new PostManager();
-    $chapterNavList = $postManager->getPostsChapter();
-
-    require('view/frontend/homeView.php');
+    require 'view/frontend/homeView.php';
 }
 
+function allChapter()
+{
+    $postManager = new PostManager();
+    $postList = $postManager->getPostList();
 
+    require 'view/frontend/allChapterView.php';
+}
+
+function chapter($id)
+{
+    $postManager = new PostManager();
+    $post = $postManager->getPost($id);
+
+    require 'view/frontend/chapterView.php';
+}
+
+/*
 function postPublished($id)
 {
     $postManager = new PostManager();
@@ -74,3 +86,4 @@ function report($commentId, $postId)
         header('location: index.php?action=post&id=' . $postId);
     }
 }
+*/

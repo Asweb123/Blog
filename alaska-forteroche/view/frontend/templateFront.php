@@ -18,19 +18,14 @@
 
     <div class="collapse navbar-collapse font-weight-bold" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item <?= $accueilActive ?>">
+            <li class="nav-item <?= $homeActive ?>">
                 <a class="nav-link" href="index.php">Accueil<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle <?= $chapitresActive ?>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Chapitres
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <?= $chapterNav ?>
-                </div>
+            <li class="nav-item <?= $chapterActive ?>">
+                <a class="nav-link" href="index.php?action=allChapter">Les chapitres<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item <?= $AproposActive ?>">
-                <a class="nav-link" href="#">A propos<span class="sr-only">(current)</span></a>
+            <li class="nav-item <?= $authorActive ?>">
+                <a class="nav-link" href="#">L'auteur<span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>

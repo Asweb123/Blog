@@ -2,7 +2,7 @@
 
 $head_title = 'Billet simple pour l\'Alaska';
 
-$accueilActive = 'active';
+$homeActive = 'active';
 
 
 
@@ -21,16 +21,6 @@ ob_start();
 <?php
 $header = ob_get_clean();
 
-ob_start();
-while ($chapterNav = $chapterNavList->fetch())
-{
-?>
-<a class="dropdown-item" href="index.php?action=post&amp;id=<?= $chapterNav['id'] ?>">Chapitre <?= $chapterNav['chapter']?></a>
-<?php
-}
-$chapterNavList->closeCursor();
-?>
-<?php $chapterNav = ob_get_clean();
 
 ob_start();
 ?>
@@ -43,7 +33,7 @@ ob_start();
         integer aenean metus egestas. Potenti nec adipiscing. Augue amet a neque proin vitae cursus risus dictum primis
         lobortis id nullam facilisi sit. Euismod potenti sed sagittis adipiscing.</p>
 
-    <form class="form text-center mt-5" action="index.php?action=post&id=22" method="post">
+    <form class="form text-center mt-5" action="index.php?action=allChapter" method="post">
         <input type="submit" class="btn btn-primary" value="Commencer la lecture"/>
     </form>
 </section>

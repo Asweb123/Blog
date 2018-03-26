@@ -7,7 +7,14 @@ foreach ($_REQUEST as $key => $val)
     $_REQUEST[$key] = $val;
 }
 
+
+/*
+$commentManager = new CommentMannger($db);
+*/
+
+/*
 require('controller/filterController.php');
+*/
 require('controller/frontController.php');
 
 try {
@@ -16,6 +23,14 @@ try {
 
         switch ($_GET['action']){
 
+            case "allChapter":
+                allChapter();
+            break;
+
+            case "chapter":
+                chapter($_GET['id']);
+            break;
+            /*
             case "post":
                 $idTestError = idPostController($_GET['id']);
                 if ($idTestError == null) {
@@ -57,6 +72,7 @@ try {
 
             default:
                 home();
+            */
         }
 
     } else {

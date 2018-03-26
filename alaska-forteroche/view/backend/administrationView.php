@@ -81,7 +81,7 @@
     $req = $checkedModeratedList->fetchall();
     $reportColumn = array_column($req, 'report');
     if (!in_array(2, $reportColumn)) {
-        echo'<p class="text-success mt-4" style="font-size: 20px">Aucun commentaire signalé</p>';
+        echo'<p class="text-success mt-4 text-center" style="font-size: 20px">Aucun commentaire signalé</p>';
     } else {
     ?>
 

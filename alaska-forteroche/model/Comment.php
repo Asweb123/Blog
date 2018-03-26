@@ -1,23 +1,22 @@
 <?php
 
-class Post
+class Comment
 {
 
     protected   $id,
-                $chapter,
-                $title,
+                $idPost,
+                $author,
                 $content,
-                $dateAdd,
-                $publish,
+                $date,
+                $report,
                 $errors = [];
 
     /**
      * Constantes relatives aux erreurs possibles rencontrées lors de l'exécution de la méthode.
      */
-    const CHAPITRE_INVALIDE = 1;
-    const TITRE_INVALIDE = 2;
-    const CONTENU_INVALIDE = 3;
-    const PUBLISH_INVALIDE = 4;
+    const AUTEUR_INVALIDE = 1;
+    const CONTENU_INVALIDE = 2;
+    const REPORT_INVALIDE = 3;
 
 
     /**
@@ -53,12 +52,12 @@ class Post
     }
 
     /**
-     * Méthode permettant de savoir si le post est valide.
+     * Méthode permettant de savoir si le comment est valide.
      * @return bool
      */
     public function isValid()
     {
-        return !(empty($this->chapter) || empty($this->title) || empty($this->content));
+        return !(empty($this->author) || empty($this->content));
     }
 
 
@@ -74,14 +73,14 @@ class Post
         return $this->id;
     }
 
-    public function chapter()
+    public function idPost()
     {
-        return $this->chapter;
+        return $this->idPost;
     }
 
-    public function title()
+    public function author()
     {
-        return $this->title;
+        return $this->author;
     }
 
     public function content()
@@ -89,14 +88,14 @@ class Post
         return $this->content;
     }
 
-    public function dateAdd()
+    public function date()
     {
-        return $this->dateAdd;
+        return $this->date;
     }
 
-    public function publish()
+    public function report()
     {
-        return $this->publish;
+        return $this->report;
     }
 
 
@@ -108,20 +107,20 @@ class Post
             $this->id = (int) $id;
     }
 
-    public function setChapter($chapter)
+    public function setIdPost($idPost)
     {
-        $this->chapter = (int) $chapter;
+        $this->idPost = (int) $idPost;
     }
 
-    public function setTitle($title)
+    public function setAuthor($author)
     {
-        if (!is_string($title) || empty($title))
+        if (!is_string($author) || empty($author))
         {
-            $this->errors[] = self::TITRE_INVALIDE;
+            $this->errors[] = self::AUTEUR_INVALIDE;
         }
         else
         {
-            $this->title = $title;
+            $this->author = $author;
         }
     }
 
@@ -137,20 +136,20 @@ class Post
         }
     }
 
-    public function setDateAdd(DateTime $date)
+    public function setDate(DateTime $date)
     {
         $this->date = $date;
     }
 
-    public function setPublish($publish)
+    public function setReport($report)
     {
-        if (($publish != 1) || ($publish != 2))
+        if (($report != 1) || ($report != 2) || ($report != 3))
         {
-            $this->errors[] = self::PUBLISH_INVALIDE;
+            $this->errors[] = self::REPORT_INVALIDE;
         }
         else
         {
-            $this->publish = $publish;
+            $this->report = $report;
         }
     }
 
