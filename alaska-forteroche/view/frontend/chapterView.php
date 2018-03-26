@@ -35,12 +35,12 @@ ob_start();
     <h4 class="mb-3">Rédiger un commentaire</h4>
     <form action="index.php?action=addComment&amp;id=<?= $post->id() ?>" method="post">
         <div class="form-group font-weight-bold">
-            <label for"author">Votre nom :</label><br/>
+            <label for"author">Votre pseudo :</label><br/>
             <input class="form-control col-4 box-shadow" type="text" id="author" name="author"/>
         </div>
         <div class="form-group font-weight-bold">
-            <label for="comment">Votre commentaire :</label><br/>
-            <textarea rows="6" class="form-control box-shadow" id="comment" name="comment"></textarea>
+            <label for="content">Votre commentaire :</label><br/>
+            <textarea rows="6" class="form-control box-shadow" id="content" name="content"></textarea>
         </div>
         <div class="form-group font-weight-bold">
             <input class="btn btn-primary" type="submit" value="Envoyer"/>
@@ -48,30 +48,30 @@ ob_start();
     </form>
 </section>
 
-<?php /*
+
 
 <section class="my-5">
 
     <?php
-    while ($comment = $comments->fetch())
+    foreach ($commentList as $comment)
     {
     ?>
     <div class="border my-3 p-3 rounded box-shadow comment-color">
         <p class="mb-2">
-            <strong class="h5"><?= htmlspecialchars($comment['comment_author']) ?></strong>
-            <em class="font-italic">Le <?= htmlspecialchars($comment['date_comment_fr']) ?></em>
+            <strong class="h5"><?= $comment->author() ?></strong>
+            <em class="font-italic">Le <?= $comment->dateAdd() ?></em>
         </p>
 
         <?php
-        switch ($comment['report']) {
+        switch ($comment->report()) {
 
             case 1:
                 ?>
-                <p class="mb-1"><?= nl2br(htmlspecialchars($comment['comment_content'])) ?></p>
+                <p class="mb-1"><?= nl2br($comment->content()) ?></p>
 
-            <form class="text-right" action="index.php?action=report" method="post">
-                <input type="hidden" name="comment_id" id="comment_id" value="<?= $comment['id'] ?>"/>
-                <input type="hidden" name="id_post" id="id_post" value="<?= $comment['id_post'] ?>"/>
+            <form class="text-right" action="index.php?action=reportComment" method="post">
+                <input type="hidden" name="id" id="id" value="<?= $comment->id() ?>"/>
+                <input type="hidden" name="idPost" id="idPost" value="<?= $comment->idPost() ?>"/>
                 <input type="submit" class="mybtn" value="Signaler comme inapproprié"/>
             </form>
                 <?php
@@ -79,7 +79,7 @@ ob_start();
 
             case 2:
                 ?>
-                <p class="mb-1"><?= nl2br(htmlspecialchars($comment['comment_content'])) ?></p>
+                <p class="mb-1"><?= nl2br($comment->content()) ?></p>
                 <p class="alert alert-warning mb-0">Ce commentaire a été signalé.</p>
                 <?php
                 break;
@@ -96,16 +96,18 @@ ob_start();
     <?php
     }
 
-    if (isset($moreComLink) AND ($moreComLink == true)) {
+    if ($moreComLink == true) {
         ?>
-        <p class="text-center my-5 font-weight-bold"><a href="index.php?action=chapterAllCom&amp;id=<?= $post->id() ?>" >Voir tous les commentaires</a></p>
+        <p class="text-center my-5 font-weight-bold">
+            <a href="index.php?action=chapter&amp;id=<?= $post->id() ?>&amp;com=all" >Voir tous les commentaires</a>
+        </p>
         <?php
     }
     ?>
 
 </section>
 
-*/ ?>
+
 
 
 <?php $content= ob_get_clean();

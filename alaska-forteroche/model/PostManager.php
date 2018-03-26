@@ -1,5 +1,5 @@
 <?php
-require 'model/DbManager.php';
+require_once 'model/DbManager.php';
 
 class PostManager extends DbManager
 {
@@ -22,7 +22,7 @@ class PostManager extends DbManager
             $req->execute();
 
         } else {
-                throw new RuntimeException('Le post doit être valide pour être enregistré');
+                throw new Exception('Le chapitre doit être valide pour être enregistré');
         }
     }
 
@@ -59,11 +59,11 @@ class PostManager extends DbManager
     /**
      * Méthode retournant une liste de post demandé.
      * @param $direction string La valeur optionnelle 'DESC' permet d'obtenir les resultats du dernier au premier.
-     * @param $debut int Le premier post à sélectionner
-     * @param $limite int Le nombre de post à sélectionner
+     * @param $start int Le premier post à sélectionner
+     * @param $limit int Le nombre de post à sélectionner
      * @return array La liste des posts. Chaque entrée est une instance de Post.
      */
-    public function getPostList($direction = 'ASC', $debut = -1, $limite = -1)
+    public function getPostList($direction = null, $start = null, $limit = null)
     {
 
         $sql = 'SELECT id, chapter, title, content, publish, DATE_FORMAT(dateAdd, \'%d/%m/%Y à %Hh%i\') AS dateAdd 
@@ -74,9 +74,9 @@ FROM posts ORDER BY chapter';
             $sql .= ' DESC';
         }
 
-        if ($debut != -1 || $limite != -1)
+        if ($start != null || $limit != null)
         {
-            $sql .= ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
+            $sql .= ' LIMIT '.(int) $limit.' OFFSET '.(int) $start;
         }
 
         $db = $this->dbConnect();

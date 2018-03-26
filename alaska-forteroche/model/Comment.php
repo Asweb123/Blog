@@ -7,7 +7,7 @@ class Comment
                 $idPost,
                 $author,
                 $content,
-                $date,
+                $dateAdd,
                 $report,
                 $errors = [];
 
@@ -16,7 +16,7 @@ class Comment
      */
     const AUTEUR_INVALIDE = 1;
     const CONTENU_INVALIDE = 2;
-    const REPORT_INVALIDE = 3;
+    const REPPORT_INVALIDE = 3;
 
 
     /**
@@ -88,9 +88,9 @@ class Comment
         return $this->content;
     }
 
-    public function date()
+    public function dateAdd()
     {
-        return $this->date;
+        return $this->dateAdd;
     }
 
     public function report()
@@ -136,9 +136,9 @@ class Comment
         }
     }
 
-    public function setDate(DateTime $date)
+    public function setDateAdd(DateTime $dateAdd)
     {
-        $this->date = $date;
+        $this->dateAdd = $dateAdd;
     }
 
     public function setReport($report)

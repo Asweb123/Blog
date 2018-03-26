@@ -1,6 +1,9 @@
 <?php
-require_once('model/PostManager.php');
-require_once('model/Post.php');
+
+require_once 'model/PostManager.php';
+require_once 'model/CommentManager.php';
+require_once 'model/Post.php';
+require_once 'model/Comment.php';
 
 
 function home()
@@ -16,49 +19,72 @@ function allChapter()
     require 'view/frontend/allChapterView.php';
 }
 
-function chapter($id)
+function chapter($id, $allcom = null)
 {
     $postManager = new PostManager();
+    $commentManager = new CommentManager();
+
     $post = $postManager->getPost($id);
+
+// Si l'id n'a pas de chapitre associé, alors redirection vers l'accueil.
+    if ($post == false) {
+        require 'view/frontend/homeView.php';
+    }
+
+// Si l'utilisateur desire voir tous les commentaires.
+    if ($allcom == 'all') {
+        $moreComLink = false;
+        $commentList = $commentManager->getCommentList($id, 'DESC');
+    } else {
+
+//Sinon affichage du chapitre avec uniquement les 5 derniers commentaires.
+        $nbComment = $commentManager->count($id);
+
+        if ($nbComment <= 5) {
+            $moreComLink = false;
+        } else {
+            $moreComLink = true;
+        }
+
+        $commentList = $commentManager->getCommentList($id, 'DESC', 0, 5);
+    }
 
     require 'view/frontend/chapterView.php';
 }
 
-/*
-function postPublished($id)
+
+function reportComment($Id, $postId)
 {
-    $postManager = new PostManager();
     $commentManager = new CommentManager();
+    $reportedComment = $commentManager->reportComment($Id, 2);
 
-    $chapterNavList = $postManager->getPostsChapter();
-    $post = $postManager->getPostPublished($id);
-
-    $comments = $commentManager->get5Comments($id);
-
-    $comPostVerify = $commentManager->comPostVerify($id);
-    $com5Test =$comPostVerify->fetchAll();
-    $nbCom= count($com5Test);
-
-    if ( ($nbCom <= 5)) {
-        $moreComLink = false;
+    if($reportedComment === false) {
+        throw new Exception('Impossible de signaler le commentaire');
     } else {
-        $moreComLink = true;
+        header('location: index.php?action=chapter&id=' . $postId);
     }
-
-    require ('view/frontend/postView.php');
 }
 
-function postPublishedAll($id)
+function addComment($idPost, $author, $content)
 {
-    $postManager = new PostManager();
+    $comment = new Comment();
+    $comment->setIdPost($idPost);
+    $comment->setAuthor($author);
+    $comment->setContent($content);
+
     $commentManager = new CommentManager();
 
-    $chapterNavList = $postManager->getPostsChapter();
-    $post = $postManager->getPostPublished($id);
-    $comments = $commentManager->getComments($id);
+    $addComment = $commentManager->addComment($comment);
 
-    require ('view/frontend/postView.php');
+    if ($addComment === false) {
+        throw new Exception ('Impossible d\'ajouter le commentaire.');
+    }
+    else {
+        header('location: index.php?action=chapter&id=' . $idPost);
+    }
 }
+
+/*
 
 
 function addComment($postId, $author, $comment)
