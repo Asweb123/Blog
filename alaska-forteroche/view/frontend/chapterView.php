@@ -29,7 +29,21 @@ ob_start();
 
     <div class="text-justify lead post-text"><?= $post->content() ?></div>
 </section>
+<?php
+if (isset($previousNavChapter))
+{
+?>
+    <a href="index.php?action=chapter&amp;id=<?= $previousNavId ?>">Chapitre <?= $previousNavChapter ?></a>
+<?php
+}
 
+if (isset($nextNavChapter))
+{
+?>
+    <a href="index.php?action=chapter&amp;id=<?= $nextNavId ?>">Chapitre <?= $nextNavChapter ?></a>
+<?php
+}
+?>
 
 <section class="my-5">
     <h4 class="mb-3">Rédiger un commentaire</h4>

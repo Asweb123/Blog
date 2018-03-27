@@ -23,25 +23,22 @@ ob_start();
 
 <section>
 
-    <?php
-    foreach ($postList as $post)
-    {
+<?php
+foreach ($postList as $post)
+{
+?>
 
-        if ($post->publish() == 2)
-        {
-        ?>
-        <div>
-            <a href="index.php?action=chapter&amp;id=<?= $post->id() ?>">
-                <h2>Chapitre <?= $post->chapter() ?></h2>
-                <h3><?= $post->title() ?></h3>
-                <p>Publié le <?= $post->dateAdd()?></p>
-            </a>
-        </div>
-        <?php
-        }
+    <div>
+        <a href="index.php?action=chapter&amp;id=<?= $post->id() ?>">
+            <h2>Chapitre <?= $post->chapter() ?></h2>
+            <h3><?= $post->title() ?></h3>
+            <p>Publié le <?= $post->dateAdd() ?></p>
+        </a>
+    </div>
 
-    }
-    ?>
+<?php
+}
+?>
 
 </section>
 

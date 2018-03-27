@@ -14,7 +14,7 @@ function home()
 function allChapter()
 {
     $postManager = new PostManager();
-    $postList = $postManager->getPostList();
+    $postList = $postManager->getPostList('published');
 
     require 'view/frontend/allChapterView.php';
 }
@@ -29,6 +29,32 @@ function chapter($id, $allcom = null)
 // Si l'id n'a pas de chapitre associé, alors redirection vers l'accueil.
     if ($post == false) {
         require 'view/frontend/homeView.php';
+    }
+
+// Création des liens chapitre précédent et suivant.
+    $postList = $postManager->getPostList('published');
+
+    $currentChapter = $post->chapter();
+
+    $previousChapter = $currentChapter - 1;
+    $nextChapter = $currentChapter + 1;
+
+    if ($previousChapter > 0) {
+        foreach ($postList as $previousPost){
+            if(($previousPost->chapter()) == $previousChapter) {
+                $previousNavId = $previousPost->id();
+                $previousNavChapter = $previousPost->chapter();
+            }
+        }
+    }
+
+    if($nextChapter <= count($postList)){
+        foreach ($postList as $nextPost){
+            if(($nextPost->chapter()) == $nextChapter) {
+                $nextNavId = $nextPost->id();
+                $nextNavChapter = $nextPost->chapter();
+            }
+        }
     }
 
 // Si l'utilisateur desire voir tous les commentaires.

@@ -58,16 +58,21 @@ class PostManager extends DbManager
 
     /**
      * Méthode retournant une liste de post demandé.
+     * @param $published string La valeur optionnelle 'published' permet d'obtenir uniquement les posts publiés.
      * @param $direction string La valeur optionnelle 'DESC' permet d'obtenir les resultats du dernier au premier.
      * @param $start int Le premier post à sélectionner
      * @param $limit int Le nombre de post à sélectionner
      * @return array La liste des posts. Chaque entrée est une instance de Post.
      */
-    public function getPostList($direction = null, $start = null, $limit = null)
+    public function getPostList($published = null, $direction = null, $start = null, $limit = null)
     {
+        if ($published == 'published')
+        {
+            $whereStatement = ' WHERE publish = 2';
+        }
 
-        $sql = 'SELECT id, chapter, title, content, publish, DATE_FORMAT(dateAdd, \'%d/%m/%Y à %Hh%i\') AS dateAdd 
-FROM posts ORDER BY chapter';
+        $sql = 'SELECT id, chapter, title, content, publish, DATE_FORMAT(dateAdd, \'%d/%m/%Y\') AS dateAdd 
+FROM posts ' . $whereStatement . ' ORDER BY chapter';
 
         if ($direction == 'DESC')
         {
