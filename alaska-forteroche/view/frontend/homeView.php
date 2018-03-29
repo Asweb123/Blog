@@ -33,8 +33,8 @@ ob_start();
         integer aenean metus egestas. Potenti nec adipiscing. Augue amet a neque proin vitae cursus risus dictum primis
         lobortis id nullam facilisi sit. Euismod potenti sed sagittis adipiscing.</p>
 
-    <form class="form text-center mt-5" action="index.php?action=allChapter" method="post">
-        <input type="submit" class="btn btn-primary" value="Commencer la lecture"/>
+    <form class="form text-center mt-5" action="index.php?action=chapter&amp;id=22" method="post">
+        <input type="submit" class="btn btn-info" value="Commencer la lecture"/>
     </form>
 </section>
 <?php

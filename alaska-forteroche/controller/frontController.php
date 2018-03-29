@@ -79,10 +79,10 @@ function chapter($id, $allcom = null)
 }
 
 
-function reportComment($Id, $postId)
+function reportComment($id, $postId)
 {
     $commentManager = new CommentManager();
-    $reportedComment = $commentManager->reportComment($Id, 2);
+    $reportedComment = $commentManager->reportComment($id, 2);
 
     if($reportedComment === false) {
         throw new Exception('Impossible de signaler le commentaire');
@@ -106,36 +106,6 @@ function addComment($idPost, $author, $content)
         throw new Exception ('Impossible d\'ajouter le commentaire.');
     }
     else {
-        header('location: index.php?action=chapter&id=' . $idPost);
+        header('location: index.php?action=chapter&id=' . $idPost .'#comment-zone');
     }
 }
-
-/*
-
-
-function addComment($postId, $author, $comment)
-{
-    $commentManager = new CommentManager();
-    $affectedLines = $commentManager->addComment($postId, $author, $comment);
-
-    if ($affectedLines === false) {
-        throw new Exception ('Impossible d\'ajouter le commentaire.');
-    }
-    else {
-        header('location: index.php?action=post&id=' . $postId);
-    }
-}
-
-
-function report($commentId, $postId)
-{
-    $commentManager = new CommentManager();
-    $reportedLine = $commentManager->reportComment($commentId);
-
-    if($reportedLine === false) {
-        throw new Exception('Impossible de signaler le commentaire');
-    } else {
-        header('location: index.php?action=post&id=' . $postId);
-    }
-}
-*/

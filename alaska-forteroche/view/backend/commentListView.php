@@ -12,24 +12,27 @@
         <thead>
         <tr>
             <th class="border-top-0 ">Commentaire</th>
-            <th class="border-top-0 align-middle text-center">Auteur</th>
-            <th class="border-top-0 align-middle text-center">Date</th>
+            <th class="border-top-0 align-middle text-center d-none d-md-table-cell">Auteur</th>
+            <th class="border-top-0 align-middle text-center d-none d-md-table-cell">Chapitre</th>
+            <th class="border-top-0 align-middle text-center d-none d-md-table-cell">Date</th>
             <th class="border-top-0 align-middle text-center">Etat</th>
             <th class="border-top-0 align-middle text-center">Action</th>
         </tr>
         </thead>
 
         <tbody>
-        <?php while ( $comment = $commentPerPage->fetch())
+        <?php
+        foreach($commentPerPage as $comment)
         {
             ?>
             <tr>
-                <td class="align-middle"><?= $comment['comment_content'] ?></td>
-                <td class="align-middle text-center"><?= $comment['comment_author'] ?></td>
-                <td class="align-middle text-center"><?= $comment['date_comment_fr'] ?></td>
+                <td class="align-middle"><?= $comment->content() ?></td>
+                <td class="align-middle text-center d-none d-md-table-cell"><?= $comment->author() ?></td>
+                <td class="align-middle text-center d-none d-md-table-cell"><?= $comment->idPost() ?></td>
+                <td class="align-middle text-center d-none d-md-table-cell"><?= $comment->dateAdd() ?></td>
                 <td class="align-middle text-center font-weight-bold"
                     <?php
-                    switch ($comment['report']) {
+                    switch ($comment->report()) {
                         case 1:
                             echo ' style="color: #28a745;" >Publié';
                             break;
@@ -44,15 +47,15 @@
                 </td>
                 <td class="align-middle text-center">
                     <?php
-                    if ($comment['report'] == 3) { ?>
+                    if ($comment->report() == 3) { ?>
                         <form action="console.php?action=cancelModerate" method="post">
-                            <input type="hidden" id="comment_id" name="comment_id" value="<?= $comment['id'] ?>"/>
+                            <input type="hidden" id="id" name="id" value="<?= $comment->id() ?>"/>
                             <input type="submit" class="btn btn-success" style="width: 90px" value="Rétablir">
                         </form>
                         <?php
                     } else { ?>
                         <form action="console.php?action=moderate" method="post">
-                            <input type="hidden" id="comment_id" name="comment_id" value="<?= $comment['id'] ?>"/>
+                            <input type="hidden" id="id" name="id" value="<?= $comment->id() ?>"/>
                             <input type="submit" class="btn btn-danger" style="width: 90px" value="Modérer">
                         </form>
                         <?php
@@ -66,7 +69,34 @@
         </tbody>
     </table>
 
-<?php echo $navLink ?>
+    <nav class="mb-4" aria-label="navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item <?php if ($currentPage == 1){echo 'disabled';}  ?>">
+                <a class="page-link" href="console.php?action=commentList&amp;p=<?php if ($currentPage != 1){echo $currentPage-1;}else{echo $currentPage;} ?>">Précédent</a>
+            </li>
+
+            <?php
+            for($i=1; $i<=$totalPage; $i++){
+                if($i == $currentPage){
+                    ?>
+                    <li class="page-item active">
+                        <a class="page-link" href="console.php?action=commentList&amp;p=<?= $i ?>"><?= $i ?></a>
+                    </li>
+                    <?php
+                } else {
+                    ?>
+                    <li class="page-item">
+                        <a class="page-link" href="console.php?action=commentList&amp;p=<?= $i ?>"><?= $i ?></a>
+                    </li>
+                    <?php
+                }
+            }
+            ?>
+            <li class="page-item <?php if ($currentPage == $totalPage){echo 'disabled';} ?>">
+                <a class="page-link" href="console.php?action=commentList&amp;p=<?php if ($currentPage != $totalPage){echo $currentPage+1;}else{echo $currentPage;} ?>">Suivant</a>
+            </li>
+        </ul>
+    </nav>
 
 </section>
 

@@ -11,7 +11,6 @@ class PostManager extends DbManager
      */
     public function addPost(Post $post)
     {
-        if ($post->isValid()) {
             $db = $this->dbConnect();
             $req = $db->prepare('INSERT INTO posts(chapter, title, content, dateAdd) VALUES (:chapter, :title, :content, NOW())');
 
@@ -20,10 +19,6 @@ class PostManager extends DbManager
             $req->bindValue(':content', $post->content());
 
             $req->execute();
-
-        } else {
-                throw new Exception('Le chapitre doit être valide pour être enregistré');
-        }
     }
 
     /**
@@ -39,21 +34,20 @@ class PostManager extends DbManager
     /**
      * Méthode permettant de supprimer un post.
      * @param $id int L'identifiant du post à supprimer
-     * @param $comPostTest bool Si il y a des comments à supprimer également pour ce post.
+     * @param $comForPostExist bool Si il y a des comments à supprimer également pour ce post.
      * @return void
      */
-    public function deletePost($id, $comPostTest)
+    public function deletePost($idPost, $comForPostExist)
     {
         $db = $this->dbConnect();
 
-        if ($comPostTest == true) {
-            $req = $db->prepare('DELETE posts, comments FROM posts INNER JOIN comments ON comments.id_post = posts.id WHERE posts.id = :id');
-            $req->bindValue(':id', $id);
+        if ($comForPostExist === true) {
+            $req = $db->prepare('DELETE posts, comments FROM posts INNER JOIN comments ON comments.idPost = posts.id WHERE posts.id = :id');
+            $req->bindValue(':id', $idPost, PDO::PARAM_INT);
+            $req->execute();
         } else {
-            $db->exec('DELETE FROM posts WHERE id = '.(int) $id);
+            $db->exec('DELETE FROM posts WHERE id = '.(int) $idPost);
         }
-
-        $req->execute();
     }
 
     /**
@@ -69,6 +63,10 @@ class PostManager extends DbManager
         if ($published == 'published')
         {
             $whereStatement = ' WHERE publish = 2';
+        }
+        if ($published == 'all')
+        {
+            $whereStatement = '';
         }
 
         $sql = 'SELECT id, chapter, title, content, publish, DATE_FORMAT(dateAdd, \'%d/%m/%Y\') AS dateAdd 
@@ -116,19 +114,34 @@ AS dateAdd FROM posts WHERE id = :id');
 
     /**
      * Méthode permettant de modifier un post.
-     * @param $news Post le post à modifier
+     * @param $post Post le post à modifier
      * @return void
      */
     public function updatePost(Post $post)
     {
         $db = $this->dbConnect();
-        $requete = $db->prepare('UPDATE news SET chapter = :chapter, title = :title, content = :content WHERE id = :id');
+        $req = $db->prepare('UPDATE posts SET chapter = :chapter, title = :title, content = :content WHERE id = :id');
 
-        $requete->bindValue(':chapter', $post->chapter());
-        $requete->bindValue(':title', $post->title());
-        $requete->bindValue(':content', $post->content());
-        $requete->bindValue(':id', $post->id(), PDO::PARAM_INT);
+        $req->bindValue(':chapter', $post->chapter());
+        $req->bindValue(':title', $post->title());
+        $req->bindValue(':content', $post->content());
+        $req->bindValue(':id', $post->id(), PDO::PARAM_INT);
 
-        $requete->execute();
+        $req->execute();
     }
-}
+
+
+    /**
+     * Méthode permettant de publier un post.
+     * @param $id int l'id du post à publier
+     * @return void
+     */
+    public function publishPost($id)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE posts SET publish = 2 WHERE id = :id');
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $req->execute();
+
+}   }

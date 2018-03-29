@@ -13,18 +13,10 @@ try {
                 break;
 
             case 'addedPost';
-                if (!empty($_POST['chapter']) AND !empty($_POST['title']) AND !empty($_POST['content'])) {
-                    addedPost($_POST['chapter'], $_POST['title'], $_POST['content']);
+                if ((!empty($_POST['chapter']) && is_numeric($_POST['chapter']) == true) AND !empty($_POST['title']) AND !empty($_POST['content'])) {
+                    savePost($_POST['chapter'], $_POST['title'], $_POST['content']);
                 } else {
-                    throw new Exception('Le numéro de chapitre, le titre ou le contenu du chapitre n\'a pas été renseigné');
-                }
-                break;
-
-            case 'publishPost';
-                if (isset($_GET['id']) AND $_GET['id'] > 0) {
-                    publishPost($_GET['id']);
-                } else {
-                    throw new Exception('id de post non valide');
+                    throw new Exception('Le numéro de chapitre, le titre ou le contenu du chapitre n\'est pas valide');
                 }
                 break;
 
@@ -48,6 +40,14 @@ try {
                 }
                 break;
 
+            case 'publishPost';
+                if (isset($_GET['id']) AND $_GET['id'] > 0) {
+                    publishPost($_GET['id']);
+                } else {
+                    throw new Exception('id de post non valide');
+                }
+                break;
+
             case 'deletePost';
                 if (isset($_GET['id']) AND $_GET['id'] > 0) {
                     deletePost($_GET['id']);
@@ -57,23 +57,23 @@ try {
                 break;
 
             case 'moderate';
-                if (isset($_POST['comment_id']) AND $_POST['comment_id'] > 0) {
-                    moderate($_POST['comment_id']);
+                if (isset($_POST['id']) AND $_POST['id'] > 0) {
+                    moderate($_POST['id']);
                 } else {
-                    throw new Exception('id liant le commentaire au post non valide');
+                    throw new Exception('id de commentaire non valide');
                 }
                 break;
 
             case 'cancelModerate';
-                if (isset($_POST['comment_id']) AND $_POST['comment_id'] > 0) {
-                    cancelModerate($_POST['comment_id']);
+                if (isset($_POST['id']) AND $_POST['id'] > 0) {
+                    cancelModerate($_POST['id']);
                 } else {
-                    throw new Exception('id liant le commentaire au post non valide');
+                    throw new Exception('id de commentaire non valide!');
                 }
                 break;
 
             case 'commentList';
-                if (isset($_GET['p']) AND $_GET['p'] > 0 AND ctype_digit($_GET['p']) == 1) {
+                if (isset($_GET['p']) AND (is_numeric($_GET['p']) == true) AND ($_GET['p'] > 0)) {
                     commentList($_GET['p']);
                 } else {
                     throw new Exception('numéro de page non valide');
@@ -81,20 +81,22 @@ try {
                 break;
 
             default:
-                admin(1);
+                admin();
                 break;
-
         }
 
+
     } else if (isset($_GET['p'])) {
-        if ($_GET['p'] > 0 AND ctype_digit($_GET['p']) == 1) {
+        if ((is_numeric($_GET['p']) == true) AND ($_GET['p'] > 0)) {
             admin($_GET['p']);
         } else {
             throw new Exception('numéro de page non valide');
         }
+
     } else {
-        admin(1);
+        admin();
     }
+
 }
 catch(Exception $e) {
     echo 'Erreur : ' . $e->getMessage();

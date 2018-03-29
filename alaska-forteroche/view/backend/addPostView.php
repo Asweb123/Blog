@@ -4,7 +4,7 @@
 
 <h1 class="text-center my-5">Ajouter un chapitre</h1>
 
-<form action="console.php?action=addedPost" method="post">
+<form action="console.php?action=savePost" method="post">
     <div class="form-group font-weight-bold">
         <label for="chapter">Numéro du chapitre :</label>
         <input type="text" class="form-control" name="chapter" id="chapter" required/><br/>
@@ -18,7 +18,7 @@
         <textarea rows="25" name="content" class="form-control" id="content"></textarea>
     </div>
     <div class="form-group text-right">
-        <input type="submit" class="btn btn-primary mb-2" value="Enregistrer le chapitre">
+        <input type="submit" class="btn btn-primary mb-2" value="Enregistrer le brouillon">
     </div>
 </form>
 

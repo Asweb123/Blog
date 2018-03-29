@@ -1,30 +1,49 @@
 <?php
 
-require_once ('model/PostManager.php');
-require_once ('model/CommentManager.php');
-require_once ('model/Pagination.php');
-require_once ('view/backend/NavPaginationView.php');
-require_once ('controller/PaginationController.php');
+require_once 'model/PostManager.php';
+require_once 'model/CommentManager.php';
+require_once 'model/Post.php';
+require_once 'model/Comment.php';
 
-function admin($p)
+function admin($currentPage = 1)
 {
-    $perPage = 5;
-    $table ='posts';
+//Gestion des chapitres
+//Création de la pagination pour la liste de post avec 5 posts par page.
+    $postManager = new PostManager();
 
-    $paginationController = new PaginationController();
-    $nbPage = $paginationController->nbPage($perPage, $table);
-    $current = $paginationController->current($p, $nbPage);
-    $postPerPage = $paginationController->elementPerPage($current, $perPage, $table);
+    $totalPost = $postManager->count();
+    $PerPage = 5;
+    $totalPage = ceil($totalPost / $PerPage);
 
+    //Gestion de $currentPage si supérieur au nombre total de page.
+    if ($currentPage > $totalPage) {
+        $currentPage = $totalPage;
+    }
 
-    $navPaginationView = New NavPaginationView();
-    $href = 'console.php?p=';
-    $navLink = $navPaginationView->navLink($href, $current, $nbPage);
+    //Définition du premier post à afficher.
+    $firstOfPage = ($currentPage - 1) * $PerPage;
 
-    $commentManager =new CommentManager();
-    $checkedModeratedList = $commentManager->getCheckedModeratedList();
-    $moderatedList = $commentManager->getModeratedList();
+    $postPerPage = $postManager->getPostList('all', 'DESC', $firstOfPage, $PerPage);
 
+//Gestion des commentaires
+//Recuperation des commentaires signalés ou dans le cas contraire d'un tableau vide.
+    $commentManager = new CommentManager();
+    $reportedList = $commentManager->getCommentList(null, 'DESC', null, null, 'reported');
+
+    if ($reportedList != null) {
+
+    //Récupération du numéro de chapitre associé à chaque commentaire signalé en remplaçant dans $comment la valeur de l'attribut idPost
+    //par le numéro de chapitre du post correspondant...  Pas très orthodoxe mais ça marche.
+    $postList = $postManager->getPostList('published');
+
+        foreach ($reportedList as $comment) {
+            foreach ($postList as $post) {
+                if (($post->id()) == ($comment->idPost())) {
+                    $comment->setIdPost($post->chapter());
+                }
+            }
+        }
+    }
     require ('view/backend/administrationView.php');
 }
 
@@ -35,100 +54,131 @@ function addPost()
 }
 
 
-function addedPost($post_chapter, $post_title, $post_content)
+function addedPost($chapter, $title, $content)
 {
+    $post = new Post();
+
+    $post->setChapter($chapter);
+    $post->setTitle($title);
+    $post->setContent($content);
+
     $postManager = New PostManager();
-    $postManager->insertPost($post_chapter, $post_title, $post_content);
+    $postManager->addPost($post);
 
     header ('location: console.php');
 }
 
 
-function publishPost($postId)
-{
-    $postManager = New PostManager();
-    $postManager->publishPost($postId);
-
-    header ('location: console.php');
-}
-
-
-function modifyPost($postId)
+function modifyPost($id)
 {
     $postManager= new PostManager();
-    $postSelected = $postManager->getPost($postId);
+    $post = $postManager->getPost($id);
 
     require ('view/backend/modifyPostView.php');
 }
 
 
-function modifiedPost($postId, $chapter, $post_title, $post_content)
+function publishPost($id)
 {
-    $postManager = new PostManager();
-    $postManager->updatePost($postId, $chapter, $post_title, $post_content);
+    $postManager = New PostManager();
+    $postManager->publishPost($id);
 
     header ('location: console.php');
 }
 
 
-function deletePost($postId)
+function deletePost($idPost)
 {
     $postManager = new PostManager();
     $commentManager = new CommentManager();
 
-    $comPostVerify = $commentManager->comPostVerify($postId);
-    $test = $comPostVerify->fetch();
-
-    if ($test != false) {
-        $comPostTest = true;
+//Vérification de l'existance de comment(s) pour ce post et si oui suppression des comment(s) associé(s).
+    $comForPostTest = $commentManager->getCommentList($idPost);
+    if(empty($comForPostTest) == true) {
+        $comForPostExist = false;
+    } else {
+        $comForPostExist = true;
     }
-        $postManager->deletePost($postId, $comPostTest);
 
+    $postManager->deletePost($idPost, $comForPostExist);
 
+    header ('location: console.php');
+}
+
+function modifiedPost($id, $chapter, $title, $content)
+{
+    $post = new Post();
+
+    $post->setId($id);
+    $post->setChapter($chapter);
+    $post->setTitle($title);
+    $post->setContent($content);
+
+    $postManager = new PostManager();
+    $postManager->updatePost($post);
 
     header ('location: console.php');
 }
 
 
-function moderate($commentId)
+function moderate($id)
 {
     $commentManager = new CommentManager();
-    $moderatedLine = $commentManager->moderate($commentId);
+    $moderatedLine = $commentManager->reportComment($id, 3);
 
     if ($moderatedLine === false) {
-        throw new Exception('Bug lors de l\'update de report à 3 de la table comments');
+        throw new Exception('Erreur lors de l\'update de report à 3 dans la table comments');
     } else {
         header("location:".  $_SERVER['HTTP_REFERER']);
     }
 }
 
 
-function cancelModerate($commentId)
+function cancelModerate($id)
 {
     $commentManager = new CommentManager();
-    $cancelReportLine = $commentManager->cancelModerate($commentId);
+    $cancelReportLine = $commentManager->reportComment($id, 1);
 
     if ($cancelReportLine === false) {
-        throw new Exception('Bug lors de l\'update de report à 1 de la table comments');
+        throw new Exception('Erreur lors de l\'update de report à 1 dans la table comments');
     } else {
         header("location:".  $_SERVER['HTTP_REFERER']);
     }
 }
 
 
-function commentList($p)
+function commentList($currentPage = 1)
 {
-    $perPage = 10;
-    $table ='comments';
+//Liste de tous les commentaires
+//Création de la pagination pour la liste de commentaire avec 10 comments par page.
+    $commentManager = new CommentManager();
 
-    $paginationController = new PaginationController();
-    $nbPage = $paginationController->nbPage($perPage, $table);
-    $current = $paginationController->current($p, $nbPage);
-    $commentPerPage = $paginationController->elementPerPage($current, $perPage, $table);
+    $totalComment = $commentManager->count();
+    $PerPage = 10;
+    $totalPage = ceil($totalComment/$PerPage);
 
-    $navPaginationView = New NavPaginationView();
-    $href = 'console.php?action=commentList&amp;p=';
-    $navLink = $navPaginationView->navLink($href, $current, $nbPage);
+    //Gestion de $currentPage si supérieur au nombre total de page.
+    if ($currentPage > $totalPage) {
+        $currentPage = $totalPage;
+    }
+
+    //Définition du premier commentaire à afficher.
+    $firstOfPage = ($currentPage - 1) * $PerPage;
+
+    $commentPerPage = $commentManager->getCommentList(null, 'DESC', $firstOfPage, $PerPage, null);
+
+    //Récupération du chapitre associé à chaque commentaire en remplaçant dans $comment la valeur de l'attribut idPost
+    //par le numéro de chapitre du post correspondant...  Pas très orthodoxe mais ça marche.
+    $postManager = new PostManager();
+    $postList = $postManager->getPostList('published');
+
+    foreach ($commentPerPage as $comment) {
+        foreach ($postList as $post) {
+            if (($post->id()) == ($comment->idPost())){
+                $comment->setIdPost($post->chapter());
+            }
+        }
+    }
 
     require('view/backend/commentListView.php');
 }

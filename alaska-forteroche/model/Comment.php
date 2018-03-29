@@ -9,6 +9,7 @@ class Comment
                 $content,
                 $dateAdd,
                 $report,
+                $chapter,
                 $errors = [];
 
     /**
@@ -17,48 +18,6 @@ class Comment
     const AUTEUR_INVALIDE = 1;
     const CONTENU_INVALIDE = 2;
     const REPPORT_INVALIDE = 3;
-
-
-    /**
-     * Constructeur de la classe qui assigne les données spécifiées en paramètre aux attributs correspondants.
-     * @param $values array Les valeurs à assigner
-     * @return void
-     */
-    public function __construct($values = [])
-    {
-        if (!empty($values)) // Si on a spécifié des valeurs, alors on hydrate l'objet.
-        {
-            $this->hydrate($values);
-        }
-    }
-
-    /**
-     * Méthode assignant les valeurs spécifiées aux attributs correspondant.
-     * @param $data array Les données à assigner
-     * @return void
-     */
-    public function hydrate($data)
-    {
-
-        foreach ($data as $attribut => $value)
-        {
-            $method = 'set'.ucfirst($attribut);
-
-            if (is_callable([$this, $method]))
-            {
-                $this->$method($value);
-            }
-        }
-    }
-
-    /**
-     * Méthode permettant de savoir si le comment est valide.
-     * @return bool
-     */
-    public function isValid()
-    {
-        return !(empty($this->author) || empty($this->content));
-    }
 
 
     // GETTERS //
