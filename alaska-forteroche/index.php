@@ -18,7 +18,11 @@ try {
         switch ($_GET['action']){
 
             case "allChapter":
-                allChapter();
+                if (isset($_GET['p']) AND (is_numeric($_GET['p']) == true) AND ($_GET['p'] > 0)) {
+                    allChapter($_GET['p']);
+                } else {
+                    throw new Exception('numéro de page non valide');
+                }
             break;
 
             case "chapter":
@@ -52,6 +56,10 @@ try {
                     throw new Exception('Id de post non valide');
                 }
                 break;
+
+            case "author":
+                author();
+            break;
 
             default:
                 home();

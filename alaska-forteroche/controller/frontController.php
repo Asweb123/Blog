@@ -11,10 +11,25 @@ function home()
     require 'view/frontend/homeView.php';
 }
 
-function allChapter()
+function allChapter($currentPage)
 {
+//Affichage de tous les chapitres
+//Création de la pagination avec 10 posts (chapitres) par page.
     $postManager = new PostManager();
-    $postList = $postManager->getPostList('published');
+
+    $totalPost = $postManager->count();
+    $PerPage = 10;
+    $totalPage = ceil($totalPost / $PerPage);
+
+    //Gestion de $currentPage si supérieur au nombre total de page.
+    if ($currentPage > $totalPage) {
+        $currentPage = $totalPage;
+    }
+
+    //Définition du premier post à afficher.
+    $firstOfPage = ($currentPage - 1) * $PerPage;
+
+    $postPerPage = $postManager->getPostList('published', 'ASC', $firstOfPage, $PerPage);
 
     require 'view/frontend/allChapterView.php';
 }
@@ -104,8 +119,12 @@ function addComment($idPost, $author, $content)
 
     if ($addComment === false) {
         throw new Exception ('Impossible d\'ajouter le commentaire.');
+    } else {
+        header('location: index.php?action=chapter&id=' . $idPost . '#addComment');
     }
-    else {
-        header('location: index.php?action=chapter&id=' . $idPost .'#comment-zone');
-    }
+}
+
+function author()
+{
+        require 'view/frontend/authorView.php';
 }

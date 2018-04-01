@@ -7,11 +7,11 @@
 <form action="console.php?action=modifiedPost&amp;id=<?= $post->id(); ?>" method="post">
     <div class="form-group font-weight-bold">
         <label for="chapter">Modifier le numéro du chapitre</label>
-        <input type="text" class="form-control" name="chapter" id="chapter" value="<?= $post->chapter() ?>"/><br/>
+        <input type="text" class="form-control" name="chapter" id="chapter" maxlength="3" value="<?= $post->chapter() ?>"/><br/>
     </div>
     <div class="form-group font-weight-bold">
         <label for="title">Modifier le titre du chapitre</label>
-        <input type="text" class="form-control" name="title" id="title" value="<?= $post->title() ?>"/><br/>
+        <input type="text" class="form-control" name="title" id="title" maxlength="30" value="<?= $post->title() ?>"/><br/>
     </div>
     <div class="form-group font-weight-bold">
         <label for="content">Modifier le contenu du chapitre</label>

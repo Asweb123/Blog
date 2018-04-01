@@ -111,13 +111,13 @@
         echo'<p class="text-success mt-4 text-center" style="font-size: 20px">Aucun commentaire signalé</p>';
     } else {
     ?>
-    <table class="table mt-4 mb-3 table-hover">
+    <table class="table mt-4 mb-3 table-hover" style="table-layout: fixed">
         <thead>
             <tr>
-                <th class="border-top-0">Commentaire(s) signalé(s)</th>
+                <th class="border-top-0" style="width: 40%">Commentaire(s) signalé(s)</th>
                 <th class="border-top-0 align-middle text-center d-none d-md-table-cell">Auteur</th>
-                <th class="border-top-0 align-middle text-center d-none d-md-table-cell">Chapitre</th>
-                <th class="border-top-0 align-middle text-center d-none d-md-table-cell">Date</th>
+                <th class="border-top-0 align-middle text-center d-none d-xl-table-cell">Chapitre</th>
+                <th class="border-top-0 align-middle text-center d-none d-lg-table-cell">Date</th>
                 <th class="border-top-0 align-middle text-center d-none d-md-table-cell"></th>
                 <th class="border-top-0 align-middle text-center d-none d-md-table-cell"></th>
             </tr>
@@ -129,10 +129,10 @@
             {
             ?>
             <tr>
-                <td class="align-middle"><?= $comment->content() ?></td>
-                <td class="align-middle text-center d-none d-md-table-cell"><?= $comment->author() ?></td>
-                <td class="align-middle text-center d-none d-md-table-cell"><?= $comment->idPost() ?></td>
-                <td class="align-middle text-center d-none d-md-table-cell"><?= $comment->dateAdd() ?></td>
+                <td class="align-middle" style="word-wrap: break-word;"><?= nl2br(htmlspecialchars($comment->content())) ?></td>
+                <td class="align-middle text-center d-none d-md-table-cell"><?= htmlspecialchars($comment->author()) ?></td>
+                <td class="align-middle text-center d-none d-xl-table-cell"><?= $comment->idPost() ?></td>
+                <td class="align-middle text-center d-none d-lg-table-cell"><?= $comment->dateAdd() ?></td>
                 <td class="">
                     <form action="console.php?action=moderate" method="post">
                         <input type="hidden" id="id" name="id" value="<?= $comment->id() ?>"/>

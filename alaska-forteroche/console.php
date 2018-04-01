@@ -14,7 +14,7 @@ try {
 
             case 'addedPost';
                 if ((!empty($_POST['chapter']) && is_numeric($_POST['chapter']) == true) AND !empty($_POST['title']) AND !empty($_POST['content'])) {
-                    savePost($_POST['chapter'], $_POST['title'], $_POST['content']);
+                    addedPost($_POST['chapter'], $_POST['title'], $_POST['content']);
                 } else {
                     throw new Exception('Le numéro de chapitre, le titre ou le contenu du chapitre n\'est pas valide');
                 }

@@ -5,10 +5,15 @@
     <meta name="description" content="Billet simple pour l'Alaska, roman de Jean Forteroche">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="public/css/style.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="public/css/styles.css">
     <title><?= $head_title ?></title>
 </head>
 <body class="body-front">
+
+<div>
+    <?= $headerHome ?>
+</div>
 
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light box-shadow-nav border-bottom">
     <a class="navbar-brand mb-0 h1" href="index.php">Jean Forteroche</a>
@@ -22,24 +27,26 @@
                 <a class="nav-link" href="index.php">Accueil<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item <?= $chapterActive ?>">
-                <a class="nav-link" href="index.php?action=allChapter">Chapitres<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.php?action=allChapter&amp;p=1">Chapitres<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item <?= $authorActive ?>">
-                <a class="nav-link" href="#">L'auteur<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.php?action=author">L'auteur<span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>
 </nav>
 
 <div>
-    <?= $header ?>
+    <?= $headerRest ?>
 </div>
 
 <div class="container">
     <?= $content ?>
 </div>
 
-<footer class="container-fluid footer text-center border-top pt-3 pb-2 box-shadow-footer">
+<div style="height: 50px"></div>
+
+<footer class="position-absolute container-fluid footer text-center border-top pt-3 pb-2 box-shadow-footer">
     <h1 class="h6">Billet simple pour l'Alaska - Copyright 2018</h1>
 </footer>
 

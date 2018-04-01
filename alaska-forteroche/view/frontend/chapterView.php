@@ -4,21 +4,22 @@ $head_title = 'Chapitre ' . $post->chapter();
 
 $chapterActive = 'active';
 
+$headerHome = null;
 
 ob_start();
 ?>
 
 <header class="headerPost container-fluid">
     <div class="row h-100">
-        <div class="titleBack mx-auto my-auto">
+        <div class="titleBackChapter mx-auto my-auto">
             <h1 class="text-center display-3 big-title-post"><?= $post->title() ?></h1>
         </div>
     </div>
 </header>
 
 <?php
-$header= ob_get_clean();
 
+$headerRest= ob_get_clean();
 
 ob_start();
 ?>
@@ -29,7 +30,7 @@ ob_start();
 
     <div class="text-justify lead post-text"><?= $post->content() ?></div>
 
-    <nav id="comment-zone" class="mt-5 clearfix">
+    <nav id="addComment" class="mt-5 clearfix">
         <?php
         if (isset($previousNavChapter))
         {
@@ -56,11 +57,11 @@ ob_start();
     <form action="index.php?action=addComment&amp;id=<?= $post->id() ?>" method="post">
         <div class="form-group font-weight-bold">
             <label for"author">Votre pseudo :</label><br/>
-            <input class="form-control col-md-4 box-shadow" type="text" id="author" name="author" required/>
+            <input class="form-control col-md-4 box-shadow" type="text" id="author" name="author" maxlength="30" required/>
         </div>
         <div class="form-group font-weight-bold">
             <label for="content">Votre commentaire :</label><br/>
-            <textarea rows="6" class="form-control box-shadow" id="content" name="content" required></textarea>
+            <textarea rows="6" class="form-control box-shadow" id="content" name="content" maxlength="1000" required></textarea>
         </div>
         <div class="form-group font-weight-bold">
             <input class="btn btn-info" type="submit" value="Envoyer"/>
@@ -78,7 +79,7 @@ ob_start();
     ?>
     <div class="border my-3 p-3 rounded box-shadow comment-color clearfix">
         <p class="mb-2">
-            <strong class="h5"><?= $comment->author() ?></strong>
+            <strong class="h5"><?= htmlspecialchars($comment->author()) ?></strong>
             <em class="font-italic">Le <?= $comment->dateAdd() ?></em>
         </p>
 
@@ -87,11 +88,12 @@ ob_start();
 
             case 1:
                 ?>
-                <p class="mb-1"><?= nl2br($comment->content()) ?></p>
+                <p class="mb-1" style="word-wrap:break-word"><?= nl2br(htmlspecialchars($comment->content())) ?></p>
 
                 <form class="text-right" action="index.php?action=reportComment" method="post">
                     <input type="hidden" name="id" id="id" value="<?= $comment->id() ?>"/>
                     <input type="hidden" name="idPost" id="idPost" value="<?= $comment->idPost() ?>"/>
+                    <input type="hidden" name="xWindow" id="xWindow" value="window.pageXOffset" />
                     <input type="submit" class="mybtn " style="color: #138496; text-decoration: underline" value="Signaler le commentaire"/>
                 </form>
                 <?php
@@ -99,7 +101,7 @@ ob_start();
 
             case 2:
                 ?>
-                <p class="mb-1"><?= nl2br($comment->content()) ?></p>
+                <p class="mb-1" style="word-wrap:break-word"><?= nl2br($comment->content()) ?></p>
                 <p class="float-right mb-0" style="color: #138496">Commentaire signalé</p>
                 <?php
                 break;

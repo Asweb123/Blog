@@ -7,15 +7,15 @@
 
 <section class="border my-5 p-4 rounded box-shadow console-section">
 
-    <table class="table mt-4 mb-5 table-hover">
+    <table class="table mt-4 mb-5 table-hover" style="table-layout: fixed">
 
         <thead>
         <tr>
-            <th class="border-top-0 ">Commentaire</th>
+            <th class="border-top-0 commentTable">Commentaire</th>
             <th class="border-top-0 align-middle text-center d-none d-md-table-cell">Auteur</th>
-            <th class="border-top-0 align-middle text-center d-none d-md-table-cell">Chapitre</th>
-            <th class="border-top-0 align-middle text-center d-none d-md-table-cell">Date</th>
-            <th class="border-top-0 align-middle text-center">Etat</th>
+            <th class="border-top-0 align-middle text-center d-none d-xl-table-cell">Chapitre</th>
+            <th class="border-top-0 align-middle text-center d-none d-lg-table-cell">Date</th>
+            <th class="border-top-0 align-middle text-center d-none d-sm-table-cell">Etat</th>
             <th class="border-top-0 align-middle text-center">Action</th>
         </tr>
         </thead>
@@ -26,11 +26,11 @@
         {
             ?>
             <tr>
-                <td class="align-middle"><?= $comment->content() ?></td>
-                <td class="align-middle text-center d-none d-md-table-cell"><?= $comment->author() ?></td>
-                <td class="align-middle text-center d-none d-md-table-cell"><?= $comment->idPost() ?></td>
-                <td class="align-middle text-center d-none d-md-table-cell"><?= $comment->dateAdd() ?></td>
-                <td class="align-middle text-center font-weight-bold"
+                <td class="align-middle" style="word-wrap: break-word;"><?= nl2br(htmlspecialchars($comment->content())) ?></td>
+                <td class="align-middle text-center d-none d-md-table-cell"><?= htmlspecialchars($comment->author()) ?></td>
+                <td class="align-middle text-center d-none d-xl-table-cell"><?= $comment->idPost() ?></td>
+                <td class="align-middle text-center d-none d-lg-table-cell"><?= $comment->dateAdd() ?></td>
+                <td class="align-middle text-center font-weight-bold d-none d-sm-table-cell"
                     <?php
                     switch ($comment->report()) {
                         case 1:

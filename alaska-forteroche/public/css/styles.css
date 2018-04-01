@@ -1,15 +1,23 @@
 /*---------------TEMPLATE FRONT---------------*/
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 .body-front {
-    background-color: #FFFFFA ;
+    background-color: #FAFAFA ;
 }
 
 .navbar {
     background-color: white !important;
 }
 
-
 .footer {
     background-color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
 }
 
 
@@ -26,47 +34,197 @@
 }
 
 
-/*-------------------HEADER HOME------------------*/
+/*------------------------HOME-------------------------*/
 
 .headerHome {
-    height: 95vh;
-    background: url("../imgs/mount-mckinley-903508.jpg") no-repeat fixed center;
+    height: 100vh;
+    background: url("../imgs/mount-mckinley-903508s.jpg") no-repeat fixed center;
     background-size: cover;
+    position: relative;
 }
 
 
 .titleBack {
     padding: 30px;
-    width: 300px;
+    width: fit-content;
+    max-width: 80vw;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.75);
 }
 
 .big-title {
-    font-size: 3rem;
+    font-size: 2.8rem;
 }
 
 .sub-title {
     font-size: 1.7rem;
 }
 
+.faCentered {
+    position: absolute;
+    bottom: 50px;
+    right: 50%;
+    transform: translate(50%, 50%);
+}
+
+.fa-chevron-down {
+    color: white;
+    font-size: 35px;
+}
+
+.slog{
+    font-size: 28px;
+}
+
+.picMarc {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+
+}
+
 .p-text {
     font-size: 1.15rem;
 }
 
+/*--------------HEADER HOME ANIMATION------------------*/
+.big-title {
+    animation: animationFrames ease-in-out 1.2s;
+    animation-fill-mode: backwards;
+}
 
-/*-------------------POST------------------*/
+.sub-title {
+    animation: animationFrames ease-in-out 1.5s;
+    animation-delay: 0.5s;
+    animation-fill-mode: backwards;
+}
 
+.titleBack{
+    animation: animationZoom ease-out 3s;
+    animation-fill-mode: forwards;
+}
+
+.headerFilter {
+    animation: FilterAnimationFrames ease-in-out 2.6s;
+    animation-delay: 1.2s;
+    animation-fill-mode: forwards;
+    background-color:  white;
+}
+
+.arrow {
+    animation: arrowFrames ease-in-out 1.3s;
+
+    animation-iteration-count: infinite;
+
+}
+
+
+@keyframes animationFrames{
+     0% {
+         opacity:0;
+     }
+     100% {
+         opacity:1;
+     }
+ }
+
+@keyframes animationZoom {
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(1.1);
+    }
+
+}
+
+
+
+@keyframes FilterAnimationFrames{
+    0% {
+        background-color: rgba(255, 255, 255, 1);
+    }
+    100% {
+        background-color: rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes arrowFrames {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+
+
+
+/*------------------CHAPTER LIST----------------*/
+
+
+.box-chapter {
+    text-decoration:none;
+    color: #191919;
+}
+
+.box-chapter:hover {
+    text-decoration: none;
+    color: #191919;
+
+}
+
+.box-chapter-div {
+    background-color: white;
+
+}
+
+.box-chapter-div:hover {
+    transform: scale(1.025);
+}
+
+.box-chapter-div:active {
+    background-color: #f9f9f9;
+
+    -webkit-box-shadow: 1px 3px 15px -2px rgba(207,207,207,0.9);
+    -moz-box-shadow: 1px 3px 15px -2px rgba(207,207,207,0.9);
+    box-shadow: 1px 3px 15px -2px rgba(207,207,207,0.9);
+
+    transform: translateY(1px);
+
+}
+
+
+
+
+
+/*-------------------CHAPTER------------------*/
+
+.titleBackChapter {
+    padding: 30px;
+    width: fit-content;
+    max-width: 90vw!important;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.75);
+}
 
 .big-title-post {
-    font-size: 2.7rem;
+    font-size: 2.4rem;
 }
+
 
 .post-text {
     font-size: 1rem;
 }
 
-
+.chapter-nb{
+    font-size: 2rem;
+}
 
 .comment-color {
     background-color: white;
@@ -80,11 +238,10 @@
 }
 
 .headerPost {
-    height: 50vh;
-    background: url("../imgs/mount-mckinley-903508.jpg") no-repeat fixed center;
+    height: 38vh;
+    background: url("../imgs/mount-mckinley-903508s.jpg") no-repeat fixed center;
     background-size: cover;
 }
-
 
 .box-shadow {
     -webkit-box-shadow: 2px 4px 20px -2px rgba(207,207,207,0.59);
@@ -104,16 +261,23 @@
     background-color: white;
 }
 
+/*---------------------ADMINCOMLIST-------------------*/
+
+.commentTable {
+    width: 70%;
+}
+
+
 /**************************************************************/
 @media (min-width: 576px) {
+/**************************************************************/
 
 
-
-    /*------------------- HOME------------------*/
+/*------------------- HOME------------------*/
 
     .titleBack {
         padding: 30px;
-        width: 400px;
+
     }
 
     .big-title {
@@ -128,21 +292,37 @@
         font-size: 1.25rem;
     }
 
-    /*-------------------POST------------------*/
 
+/*-------------------CHAPTER------------------*/
 
-    .big-title-post {
-        font-size: 2.9rem;
+    .titleBackChapter{
+        max-width: 350px;
+    }
+
+    .big-title-post{
+        font-size: 2.5rem;
+    }
+
+    .chapter-nb{
+        font-size: 2.2rem;
     }
 
     .post-text {
         font-size: 1.05rem;
     }
 
+/*---------------------ADMINCOMLIST-------------------*/
+
+    .commentTable {
+        width: 50%;
+}
+
 }
 
 /***********************************************************/
 @media (min-width: 768px) {
+/***********************************************************/
+
 
 /*------------------- HOME------------------*/
 
@@ -163,19 +343,25 @@
         font-size: 1.25rem;
     }
 
+
 }
 
-/*-------------------POST------------------*/
+/*-------------------CHAPTER------------------*/
 
 
 .big-title-post {
-    font-size: 3.2rem;
+    font-size: 3rem;
 }
 
+.titleBackChapter{
+    max-width: 500px;
+}
 
 
 /************************************************************/
 @media (min-width: 992px) {
+/************************************************************/
+
 
 /*------------------- HOME------------------*/
 
@@ -191,15 +377,21 @@
         font-size: 2.2rem;
     }
 
+    .slog{
+        font-size: 36px;
+    }
 
 
 
-/*-------------------POST------------------*/
+
+
+/*-------------------CHAPTER------------------*/
 
 
     .big-title-post {
-        font-size: 3.8rem;
+        font-size: 3.6rem;
     }
+
 
     .post-text {
         font-size: 1.1rem;
@@ -209,8 +401,10 @@
 
 /************************************************************/
 @media (min-width: 1200px) {
+/************************************************************/
 
-    /*------------------- HOME------------------*/
+
+/*------------------- HOME------------------*/
 
     .titleBack {
         padding: 50px;
@@ -228,15 +422,12 @@
         font-size: 1.35rem;
     }
 
-
-
-    /*-------------------POST------------------*/
-
-
-
-    .big-title-post {
-        font-size: 4.6rem;
+    .slog{
+        font-size: 40px;
     }
+
+
+/*-------------------CHAPTER------------------*/
 
     .post-text {
         font-size: 1.2rem;

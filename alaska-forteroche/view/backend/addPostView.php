@@ -4,14 +4,14 @@
 
 <h1 class="text-center my-5">Ajouter un chapitre</h1>
 
-<form action="console.php?action=savePost" method="post">
+<form action="console.php?action=addedPost" method="post">
     <div class="form-group font-weight-bold">
         <label for="chapter">Numéro du chapitre :</label>
-        <input type="text" class="form-control" name="chapter" id="chapter" required/><br/>
+        <input type="text" class="form-control" name="chapter" id="chapter" maxlength="3" required/><br/>
     </div>
     <div class="form-group font-weight-bold">
         <label for="title">Titre du chapitre :</label>
-        <input type="text" class="form-control" name="title" id="title" required/><br/>
+        <input type="text" class="form-control" name="title" id="title" maxlength="30" required/><br/>
     </div>
     <div class="form-group font-weight-bold">
         <label for "content">Contenu du chapitre :</label><br/>
