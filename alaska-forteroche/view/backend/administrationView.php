@@ -111,7 +111,7 @@
         echo'<p class="text-success mt-4 text-center" style="font-size: 20px">Aucun commentaire signalé</p>';
     } else {
     ?>
-    <table class="table mt-4 mb-3 table-hover" style="table-layout: fixed">
+    <table class="table mt-4 mb-3 table-hover" style="table-layout: fixed" id="commTable">
         <thead>
             <tr>
                 <th class="border-top-0" style="width: 40%">Commentaire(s) signalé(s)</th>

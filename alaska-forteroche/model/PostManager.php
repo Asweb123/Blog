@@ -52,7 +52,7 @@ class PostManager extends DbManager
 
     /**
      * Méthode retournant une liste de post demandé.
-     * @param $published string La valeur optionnelle 'published' permet d'obtenir uniquement les posts publiés.
+     * @param $published string La valeur optionnelle 'published' permet d'obtenir uniquement les posts publiés et 'all' tous les posts publiés et non publiés.
      * @param $direction string La valeur optionnelle 'DESC' permet d'obtenir les resultats du dernier au premier.
      * @param $start int Le premier post à sélectionner
      * @param $limit int Le nombre de post à sélectionner
@@ -84,7 +84,7 @@ FROM posts ' . $whereStatement . ' ORDER BY chapter';
 
         $db = $this->dbConnect();
         $req = $db->query($sql);
-        $req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Post');
+        $req->setFetchMode(PDO::FETCH_CLASS, 'Post');
 
         $postList = $req->fetchAll();
 
@@ -104,7 +104,7 @@ AS dateAdd FROM posts WHERE id = :id');
         $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
         $req->execute();
 
-        $req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Post');
+        $req->setFetchMode(PDO::FETCH_CLASS, 'Post');
 
         $post = $req->fetch();
 

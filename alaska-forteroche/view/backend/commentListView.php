@@ -7,7 +7,7 @@
 
 <section class="border my-5 p-4 rounded box-shadow console-section">
 
-    <table class="table mt-4 mb-5 table-hover" style="table-layout: fixed">
+    <table class="table mt-4 mb-5 table-hover" style="table-layout: fixed" id="commTable">
 
         <thead>
         <tr>

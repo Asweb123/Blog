@@ -2,8 +2,8 @@
 
 require_once 'model/PostManager.php';
 require_once 'model/CommentManager.php';
-require_once 'model/Post.php';
-require_once 'model/Comment.php';
+require_once 'model/POPO/Post.php';
+require_once 'model/POPO/Comment.php';
 
 
 function home()
@@ -102,7 +102,7 @@ function reportComment($id, $postId)
     if($reportedComment === false) {
         throw new Exception('Impossible de signaler le commentaire');
     } else {
-        header('location: index.php?action=chapter&id=' . $postId);
+        header('location: index.php?action=chapter&id=' . $postId . '&com=all#comments');
     }
 }
 

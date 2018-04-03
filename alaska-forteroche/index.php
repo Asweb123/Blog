@@ -21,7 +21,7 @@ try {
                 if (isset($_GET['p']) AND (is_numeric($_GET['p']) == true) AND ($_GET['p'] > 0)) {
                     allChapter($_GET['p']);
                 } else {
-                    throw new Exception('numéro de page non valide');
+                    throw new Exception('Numéro de page non valide');
                 }
             break;
 
@@ -33,7 +33,7 @@ try {
                         chapter($_GET['id'], null);
                     }
                 } else {
-                throw new Exception('L\'identifiant n\'est pas valide. ');
+                throw new Exception('Identifiant non valide ');
             }
             break;
 
@@ -41,7 +41,7 @@ try {
                 if (isset($_POST['id']) AND isset($_POST['idPost'])) {
                     reportComment($_POST['id'], $_POST['idPost']);
                 } else {
-                    throw new Exception('Les id de commentaires et/ou de post ne sont pas valides.');
+                    throw new Exception('Identifiant de commentaire et/ou de post non valide');
                 }
                 break;
 
@@ -53,7 +53,7 @@ try {
                         throw new Exception('Tous les champs ne sont pas remplis.');
                     }
                 } else {
-                    throw new Exception('Id de post non valide');
+                    throw new Exception('Identifiant de post non valide');
                 }
                 break;
 

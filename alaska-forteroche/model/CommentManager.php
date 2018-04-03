@@ -86,7 +86,7 @@ FROM comments '.$whereStatement.' ORDER BY id';
 
         $db = $this->dbConnect();
         $req = $db->query($sql);
-        $req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comment');
+        $req->setFetchMode(PDO::FETCH_CLASS, 'Comment');
 
         $commentList = $req->fetchAll();
 

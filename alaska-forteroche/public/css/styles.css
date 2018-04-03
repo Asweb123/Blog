@@ -194,11 +194,18 @@ html {
     -webkit-box-shadow: 1px 3px 15px -2px rgba(207,207,207,0.9);
     -moz-box-shadow: 1px 3px 15px -2px rgba(207,207,207,0.9);
     box-shadow: 1px 3px 15px -2px rgba(207,207,207,0.9);
-
     transform: translateY(1px);
-
 }
 
+.pagiNav > nav > ul > li.page-item.active > a {
+      background-color: #138496;
+      border-color: #138496;
+}
+
+.pagiNav > nav > ul > li.page-item > a {
+    color: #138496;
+    font-size: 1.05rem;
+}
 
 
 

@@ -2,8 +2,8 @@
 
 require_once 'model/PostManager.php';
 require_once 'model/CommentManager.php';
-require_once 'model/Post.php';
-require_once 'model/Comment.php';
+require_once 'model/POPO/Post.php';
+require_once 'model/POPO/Comment.php';
 
 function admin($currentPage = 1)
 {
@@ -129,7 +129,7 @@ function moderate($id)
     if ($moderatedLine === false) {
         throw new Exception('Erreur lors de l\'update de report à 3 dans la table comments');
     } else {
-        header("location:".  $_SERVER['HTTP_REFERER']);
+        header('location:'.  $_SERVER['HTTP_REFERER'] . '#commTable');
     }
 }
 
@@ -142,7 +142,7 @@ function cancelModerate($id)
     if ($cancelReportLine === false) {
         throw new Exception('Erreur lors de l\'update de report à 1 dans la table comments');
     } else {
-        header("location:".  $_SERVER['HTTP_REFERER']);
+        header('location:'.  $_SERVER['HTTP_REFERER'] . '#commTable');
     }
 }
 

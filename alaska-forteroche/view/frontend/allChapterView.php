@@ -39,34 +39,36 @@ foreach ($postPerPage as $post)
 <?php
 }
 ?>
-    <nav class="mt-5" aria-label="navigation">
-        <ul class="pagination justify-content-center">
-            <li class="page-item <?php if ($currentPage == 1){echo 'disabled';}  ?>">
-                <a class="page-link" href="index.php?action=allChapter&amp;p=<?php if ($currentPage != 1){echo $currentPage-1;}else{echo $currentPage;} ?>">Précédent</a>
-            </li>
+    <div class="pagiNav">
+        <nav class="mt-5" aria-label="navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item <?php if ($currentPage == 1){echo 'disabled';}  ?>">
+                    <a class="page-link" href="index.php?action=allChapter&amp;p=<?php if ($currentPage != 1){echo $currentPage-1;}else{echo $currentPage;} ?>">Précédent</a>
+                </li>
 
-            <?php
-            for($i=1; $i<=$totalPage; $i++){
-                if($i == $currentPage){
-                    ?>
-                    <li class="page-item active">
-                        <a class="page-link" href="index.php?action=allChapter&amp;p=<?= $i ?>"><?= $i ?></a>
-                    </li>
-                    <?php
-                } else {
-                    ?>
-                    <li class="page-item">
-                        <a class="page-link" href="index.php?action=allChapter&amp;p=<?= $i ?>"><?= $i ?></a>
-                    </li>
-                    <?php
+                <?php
+                for($i=1; $i<=$totalPage; $i++){
+                    if($i == $currentPage){
+                        ?>
+                        <li class="page-item active">
+                            <a class="page-link" href="index.php?action=allChapter&amp;p=<?= $i ?>"><?= $i ?></a>
+                        </li>
+                        <?php
+                    } else {
+                        ?>
+                        <li class="page-item">
+                            <a class="page-link" href="index.php?action=allChapter&amp;p=<?= $i ?>"><?= $i ?></a>
+                        </li>
+                        <?php
+                    }
                 }
-            }
-            ?>
-            <li class="page-item <?php if ($currentPage == $totalPage){echo 'disabled';} ?>">
-                <a class="page-link" href="index.php?action=allChapter&amp;p=<?php if ($currentPage != $totalPage){echo $currentPage+1;}else{echo $currentPage;} ?>">Suivant</a>
-            </li>
-        </ul>
-    </nav>
+                ?>
+                <li class="page-item <?php if ($currentPage == $totalPage){echo 'disabled';} ?>">
+                    <a class="page-link" href="index.php?action=allChapter&amp;p=<?php if ($currentPage != $totalPage){echo $currentPage+1;}else{echo $currentPage;} ?>">Suivant</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 
 </section>
 

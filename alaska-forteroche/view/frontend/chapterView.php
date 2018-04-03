@@ -63,7 +63,7 @@ ob_start();
             <label for="content">Votre commentaire :</label><br/>
             <textarea rows="6" class="form-control box-shadow" id="content" name="content" maxlength="1000" required></textarea>
         </div>
-        <div class="form-group font-weight-bold">
+        <div class="form-group font-weight-bold" id="comments">
             <input class="btn btn-info" type="submit" value="Envoyer"/>
         </div>
     </form>
@@ -121,7 +121,7 @@ ob_start();
     if ($moreComLink == true) {
         ?>
         <p class="text-center my-5 font-weight-bold">
-            <a style="color: #138496" href="index.php?action=chapter&amp;id=<?= $post->id() ?>&amp;com=all" >Voir tous les commentaires</a>
+            <a style="color: #138496" href="index.php?action=chapter&amp;id=<?= $post->id() ?>&amp;com=all#comments" >Voir tous les commentaires</a>
         </p>
         <?php
     }
