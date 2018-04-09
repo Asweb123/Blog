@@ -9,7 +9,7 @@ $homeActive = 'active';
 ob_start();
 ?>
 
-<header class="container-fluid headerHome">
+<header class="container-fluid headerHome" title="photo d'un paysage d'Alaska">
     <div class="row h-100 headerFilter">
         <div class="titleBack mx-auto my-auto">
             <h1 class="text-center display-3 mb-4 big-title">Billet simple pour l'Alaska</h1>
@@ -50,7 +50,7 @@ ob_start();
         <footer class="blockquote-footer">Extrait de l'oeuvre <cite title="Billet simple pour l'Alaska">Billet simple pour l'Alaska</cite></footer>
     </blockquote>
 
-    <img src="public/imgs/man-3065475_1280.jpg" class="picMarc img-thumbnail">
+    <img src="public/imgs/man-3065475_1280.jpg" class="picMarc img-thumbnail" alt="Photo du Marc et son sac à dos dans la forêt">
 
 
 

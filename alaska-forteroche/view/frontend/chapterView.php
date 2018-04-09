@@ -9,7 +9,7 @@ $headerHome = null;
 ob_start();
 ?>
 
-<header class="headerPost container-fluid">
+<header class="headerPost container-fluid" title="photo d'un paysage d'Alaska">
     <div class="row h-100">
         <div class="titleBackChapter mx-auto my-auto">
             <h1 class="text-center display-3 big-title-post"><?= $post->title() ?></h1>

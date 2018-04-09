@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" href="public/css/styles.css">
+    <link rel="icon" href="public/imgs/favicon.ico" />
 
     <!-- TinyMCE -->
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>

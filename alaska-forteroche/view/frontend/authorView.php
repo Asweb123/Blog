@@ -9,7 +9,7 @@ $headerHome = null;
 ob_start();
 ?>
 
-<header class="headerPost container-fluid">
+<header class="headerPost container-fluid" title="photo d'un paysage d'Alaska">
     <div class="row h-100">
         <div class="titleBackChapter mx-auto my-auto">
             <h1 class="text-center display-3 big-title-post">L'auteur</h1>
@@ -27,7 +27,7 @@ ob_start();
 <section class="my-5">
     <h1 class="text-center mb-5">Jean Forteroche</h1>
     <div style="max-width: 500px;" class="mx-auto mx-lg-0">
-        <img class="rounded float-lg-left mr-4 img-thumbnail img-fluid" style="max-width: 100%; height: auto;" src="public/imgs/portrait-2068038_640.jpg">
+        <img class="rounded float-lg-left mr-4 img-thumbnail img-fluid" style="max-width: 100%; height: auto;" src="public/imgs/portrait-2068038_640.jpg" alt="Photo de Jean Forteroche">
     </div>
     <div class="my-5">
 

@@ -147,7 +147,7 @@ function cancelModerate($id)
 }
 
 
-function commentList($currentPage = 1)
+function commentList($currentPage)
 {
 //Liste de tous les commentaires
 //Création de la pagination pour la liste de commentaire avec 10 comments par page.

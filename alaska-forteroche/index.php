@@ -1,13 +1,5 @@
 <?php
 
-// Filtrage de tout caractère non attendu dans l'URL
-foreach ($_REQUEST as $key => $val)
-{
-    $val = preg_replace("/[^_A-Za-z0-9-\.&=]/i",'', $val);
-    $_REQUEST[$key] = $val;
-}
-
-
 
 require('controller/frontController.php');
 
@@ -48,7 +40,11 @@ try {
             case "addComment":
                 if ((isset($_GET['id'])) && ($_GET['id'] > 0)) {
                     if (!empty($_POST['author']) AND !empty($_POST['content'])) {
-                        addComment($_GET['id'], $_POST['author'], $_POST['content']);
+                        if ((strlen($_POST['author']) <= 30) AND (strlen($_POST['content']) <= 1000)) {
+                            addComment($_GET['id'], $_POST['author'], $_POST['content']);
+                        } else {
+                            throw new Exception('Le nombre de caractère maximum pour le pseudo et/ou le message a été dépassé.');
+                        }
                     } else {
                         throw new Exception('Tous les champs ne sont pas remplis.');
                     }
